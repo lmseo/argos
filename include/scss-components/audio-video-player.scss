@@ -1,0 +1,142 @@
+/* Audio/Video jPlayer Skin 
+--------------------------------------------------------------*/
+.jp-audio, .jp-video {
+	margin: 0 auto;
+	width: auto;
+	max-width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+.jp-gui {
+	margin-bottom: -35px;
+}
+.jp-interface {
+	background: #232527;
+	border: 1px solid #000;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 0 #4B4E53 inset, 0 1px 3px rgba(0, 0, 0, 0.7);
+	box-shadow: 0 1px 0 #4B4E53 inset, 0 1px 3px rgba(0, 0, 0, 0.7);
+	margin-bottom: 3px;
+	position: absolute;
+	height: 33px;
+	width: 96.25%;
+	left: 20px;
+	bottom: 20px;
+	overflow: hidden;
+}
+.jp-video-full {
+	position: relative;
+}
+.jp-video-full .jp-jplayer {
+	background: #000000;
+	top: 0;
+	left: 0;
+	position: fixed !important;
+	position: relative;
+	overflow: hidden;
+	z-index: 998;
+}
+.jp-video-full .jp-gui {
+	z-index: 1000;
+	display: block;
+}
+.jp-video-full .jp-interface {
+	bottom: 0;
+	top: auto;
+	left: 0.25%;
+	position: fixed;
+	width: 99%;
+	z-index: 1000;
+}
+.jp-controls, .jp-toggles {
+	float: left;
+	margin: 0;
+	padding: 0;
+	z-index: 100;
+}
+.jp-controls li {
+	float: left;
+	list-style: none;
+}
+.jp-controls a {
+	position: absolute;
+	overflow: hidden;
+	text-indent: -999em;
+}
+.jp-play, .jp-pause, .jp-mute, .jp-unmute {
+	background: #d2d6db url(images/sprite.png) 0 -100px no-repeat;
+	border-top: 1px solid #4b4e53;
+	display: block;
+	z-index: 2;
+	height: 100%;
+	width: 30px;
+}
+.jp-play:hover, .jp-pause:hover, .jp-mute:hover, .jp-unmute:hover {
+	background-color: #f26c4f;
+}
+.jp-pause {
+	background-position: 0 -133px;
+}
+.jp-mute {
+	background-position: 0 -199px;
+}
+.jp-unmute {
+	background-position: 0 -167px;
+}
+.jp-play, .jp-pause {
+	border-radius: 3px 1px 1px 3px;
+	border-right: 1px solid #4b4e53;
+}
+.jp-mute, .jp-unmute {
+	border-left: 1px solid #4b4e53;
+	right: 52px;
+}
+.jp-audio .jp-mute, .jp-audio .jp-unmute {
+	right: 52px;
+}
+.jp-progress {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	position: absolute;
+	padding: 0 95px 0 40px;
+	margin: 11px 0;
+	width: 100%;
+	height: 9px;
+}
+.iphone .jp-progress {
+	padding-right: 15px;
+}
+.jp-volume-bar {
+	float: right;
+	margin: 11px 0;
+	right: 8px;
+	width: 40px;
+	height: 10px;
+}
+.jp-audio .jp-volume-bar {
+	right: 7px;
+}
+.jp-seek-bar, .jp-volume-bar {
+	background: #141618;
+	border-bottom: 1px solid #2c2d2f;
+	border-left: 1px solid #0f0f10;
+	border-right: 1px solid #0f0f10;
+	border-top: 1px solid #000000;
+	border-radius: 2px;
+	cursor: pointer;
+	height: 8px;
+	padding: 0 0 1px 0;
+	position: relative;
+	z-index: 999;
+}
+.jp-play-bar, .jp-volume-bar-value {
+	border-radius: 1px 2px 2px 1px;
+	background: #f26c4f;
+	height: 8px;
+}
+.columns-wrapper {
+	margin: 20px 0;
+	overflow: hidden;
+	width: 100%;
+}

@@ -1,0 +1,76 @@
+/* CTA Widget Widget 
+------------------------------------------------------------ */ 
+.after-content-widget {
+	background-color: $quaternary-color;
+	//border-top: scale-color($quinary-color, $lightness: -35%) 1px solid;
+	color: #fff;
+	padding-top: 30px;
+  h2{
+  	color:$quinary-color;
+    background-image: -webkit-linear-gradient(transparent, transparent),url(http://www.96elephants.org/assets/textures/white--full-010fca9b9c7c016970eca1ff9fd25e9d.jpg);
+    background-image: -o-linear-gradient(transparent, transparent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  hr.small{
+  	border-top-color:$quinary-color;
+  	border-top-width: 3px;
+  	margin-top: -2px;
+  }
+}
+.cta-widget{
+	overflow: hidden;
+	text-align: center;
+
+	ul{
+		text-align: left;
+		list-style:none;
+		.fa{
+			margin-right: 10px;
+		}
+	}
+	li:before {    
+		font-family: 'FontAwesome';
+		content: '\f00c';
+		margin:0 10px 0 0;
+		color: $quinary-color;
+	}
+	.cta-header-divider{
+		margin: 0 auto;
+		width: 45%;
+		text-align: center;
+		border-top:1px solid transparent;
+		border-top-color: rgba(124, 113, 108,0.3);
+	}
+	.cta_button{
+		margin-bottom:20px;
+	}
+	.buttons-wrapper{
+		padding: 40px 0 40px;
+	}
+}
+@media #{$medium-up} {
+	.after-content-widget {
+		padding: 30px;
+	}
+	.cta-widget{
+		margin: 0 0 20px;
+		margin: 0 0 2rem;
+		.cta_button{
+			margin-bottom:0px;
+		}
+		.buttons-wrapper{
+			padding: 40px 0 0;
+		}
+		.cta-content-list{
+			width:600px;
+			margin:0 auto;
+		}
+	}
+}
+@media #{$large-up} {
+	.cta-widget .buttons-wrapper{
+		width:600px;
+		margin:0 auto;
+	}
+}

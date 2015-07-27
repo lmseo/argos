@@ -1,0 +1,39 @@
+/* Flicker Photos Widget 
+------------------------------------------------------------ */ 
+ .widget .flickr_badge_image {
+	float: left;
+	height: auto;
+	margin: 0 4px 4px 0;
+	overflow: hidden;
+	width: auto;
+}
+#flickr-wrapper {
+	display: inline-block;
+	overflow: hidden;
+}
+.flickr_badge_image {
+	float: left;
+	width: 66px;
+	height: 66px;
+}
+.flickr_badge_image img {
+	width: 66px;
+	height: 66px;
+	padding: 0;
+	background: none repeat scroll 0 0 transparent;
+	opacity: 0.7;
+	-moz-opacity: 0.7;
+	filter:alpha(opacity=70);
+	-webkit-transition: opacity .7s ease-out;
+	-moz-transition: opacity .7s ease-out;
+	-o-transition: opacity .7s ease-out;
+	transition: opacity .7s ease-out;
+}
+.flickr_badge_image img:hover {
+	opacity: 1;
+	-moz-opacity: 1;
+	filter:alpha(opacity=100);
+}
+.flickr_badge_image a:hover {
+	border: none;
+}

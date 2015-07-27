@@ -1,0 +1,30 @@
+/* Featured Page / Post 
+------------------------------------------------------------ */ 
+.featuredpost .post, .featuredpage .page {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border: medium none;
+	float: left;
+	margin: 0 0 20px;
+	margin: 0 0 2rem;
+	padding: 0;
+}
+.featuredpage .page .entry-header, .featuredpost .post .entry-header {
+	margin: 0
+}
+.featuredpage h2, .featuredpost h2 {
+	line-height: 0;
+	margin: 0 0 10px 0;
+	margin: 0 0 1rem 0;
+	text-align: left;
+}
+.featuredpage h2 a, .featuredpost h2 a {
+	font-weight: 300;
+	letter-spacing: 0;
+	line-height: 1;
+	margin: 0;
+	text-transform: none;
+}
+
+.more-from-category {    
+	padding: 0 10px;
+}

@@ -1,0 +1,22 @@
+/* Social widget
+ ------------------------------------------------------------ */ 
+ .zp_social_icons ul li {
+	margin: 0 4px 4px 0 !important;
+}
+.zp_social_icons ul li a {
+	background: rgba(0, 0, 0, 0) !important;
+	border: 2px solid $tertiary-color !important;
+	color: $tertiary-color !important;
+	font-size: 24px !important;
+	@include transition-property(all);
+	@include transition-duration(0.25s);
+	@include transition-timing-function(ease-in);
+}
+.zp_social_icons ul li a:hover {
+	background-color: rgba(0, 0, 0, 0) !important;
+	color: #fff !important;
+	text-decoration: none;
+	border-color: #fff !important;
+	@include border-top-left-radius(50%);
+	@include border-bottom-right-radius(50%);
+}
