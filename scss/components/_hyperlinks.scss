@@ -1,0 +1,21 @@
+/* Hyperlinks 
+ ------------------------------------------------------------ */ 
+ a, a:visited {
+	outline: none;
+	text-decoration: none;
+	/*color: #FF304E;*/
+	color: $tertiary-color;
+	transition: color linear 0.15s;
+	-ms-transition: color linear 0.15s;
+	-moz-transition: color linear 0.15s;
+	-webkit-transition: color linear 0.15s;
+	-o-transition: color linear 0.15s;
+}
+a:hover, a:focus, a:active {
+	color:scale-color($tertiary-color, $lightness: 35%);
+	text-decoration: underline;
+	outline: medium none;
+}
+a img {
+	border: medium none;
+}

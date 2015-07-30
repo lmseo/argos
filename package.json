@@ -1,0 +1,23 @@
+{
+  "name": "argos",
+  "version": "1.0.0",
+  "description": "Argos is a WordPress child theme for the Genesis framework. It is based on the Novo theme by Zigzagpress.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lmseo/argos.git"
+  },
+  "keywords": [
+    "WordPress",
+    "Genesis"
+  ],
+  "author": "Luis Piedrahita",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lmseo/argos/issues"
+  },
+  "homepage": "https://github.com/lmseo/argos"
+}
