@@ -1,0 +1,79 @@
+/* tooltip CSS
+-------------------------------------------------------------*/
+
+#tiptip_holder {
+	background: url(include/widgets/images/bg-popup.png) no-repeat scroll 12px bottom;
+	display: block;
+	left: -17px;
+	padding: 0 0 20px;
+	position: absolute;
+	top: 19px;
+	z-index: 99999;
+	&.tip_top {
+		padding-bottom: 5px;
+	}
+}
+#tiptip_holder
+#tiptip_holder.tip_bottom {
+	padding-top: 5px;
+}
+#tiptip_holder.tip_right {
+	padding-left: 5px;
+}
+#tiptip_holder.tip_left {
+	padding-right: 5px;
+}
+#tiptip_content {
+	font-size: 11px;
+	color: #fff;
+	padding: 2px 8px;
+	background-color: #46494A;
+}
+#tiptip_arrow, #tiptip_arrow_inner {
+	position: absolute;
+	height: 0;
+	width: 0;
+}
+#tiptip_holder.tip_top #tiptip_arrow {
+	border-top-color: #fff;
+	border-top-color: rgba(255, 255, 255, 0.35);
+}
+#tiptip_holder.tip_bottom #tiptip_arrow {
+	border-bottom-color: #fff;
+	border-bottom-color: rgba(255, 255, 255, 0.35);
+}
+#tiptip_holder.tip_right #tiptip_arrow {
+	border-right-color: #fff;
+	border-right-color: rgba(255, 255, 255, 0.35);
+}
+#tiptip_holder.tip_left #tiptip_arrow {
+	border-left-color: #fff;
+	border-left-color: rgba(255, 255, 255, 0.35);
+}
+#tiptip_holder.tip_top #tiptip_arrow_inner {
+	margin-top: -7px;
+	margin-left: -6px;
+	border-top-color: rgb(102,102,102);
+	border-top-color: rgba(102, 102, 102, 0.92);
+}
+#tiptip_holder.tip_bottom #tiptip_arrow_inner {
+	margin-top: -5px;
+	margin-left: -6px;
+	border-bottom-color: rgb(102,102,102);
+	border-bottom-color: rgba(102, 102, 102, 0.92);
+}
+#tiptip_holder.tip_right #tiptip_arrow_inner {
+	margin-top: -6px;
+	margin-left: -5px;
+	border-right-color: rgb(102,102,102);
+	border-right-color: rgba(102, 102, 102, 0.92);
+}
+#tiptip_holder.tip_left #tiptip_arrow_inner {
+	margin-top: -6px;
+	margin-left: -7px;
+	border-left-color: rgb(102,102,102);
+	border-left-color: rgba(102, 102, 102, 0.92);
+}	
+#tiptip_content:after{
+	background: #fff;	
+}

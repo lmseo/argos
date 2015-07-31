@@ -20,3 +20,36 @@
 	border-top-left-radius:50%;
 	border-bottom-right-radius:50%;
 }
+.zp_social_icons {
+	overflow: hidden;
+}
+
+.zp_social_icons .alignleft, .zp_social_icons .alignright {
+	margin: 0; padding: 0;
+}
+.zp_social_icons ul li {
+	float: left;
+	list-style-type: none !important;
+	margin: 0 4px 0 0;
+	padding: 0 !important;
+	transition: background-color 300ms ease-in-out 0s;
+}
+.zp_social_icons ul li a {
+	display: block;
+	border-radius: 0;
+	font-family: "socialicoregular";
+	height: 40px;
+	line-height: 40px;
+	opacity: 1;
+	overflow: hidden;
+	text-align: center;
+	width: 40px;
+}
+.zp_social_icons ul li a:hover {
+	background-color: #fff;
+	display: block;
+	overflow: hidden;
+}
+.zp_social_icons ul li.social-facebook a, .zp_social_icons ul li.social-gplus a, .zp_social_icons ul li.social-twitter a{
+	background-color: transparent;
+}
