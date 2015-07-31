@@ -623,7 +623,6 @@ function zp_add_like_variables(){
 /*
  * Add hidden Sidebar
  */
-
 add_action( 'genesis_before_header', 'zp_custom_sidebar' );
 function zp_custom_sidebar(){
 	if ( ( !is_home() && !is_front_page() )) {
