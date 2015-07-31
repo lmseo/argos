@@ -1,20 +1,24 @@
 {
-  "name": "vqconstruction",
+  "name": "argos",
   "version": "0.0.1",
   "dependencies": {
-    "galereya": "https://github.com/VodkaBears/galereya.git#~0.9.94",
+    "fastclick": ">=0.6.11",
     "flexslider": "~2.5.0",
+    "galereya": "https://github.com/VodkaBears/galereya.git#~0.9.94",
     "jquery-css-transform": "https://github.com/zachstronaut/jquery-css-transform.git",
-    "prettyphoto": "*",
-    "quicksand": "https://github.com/razorjack/quicksand.git#~1.2.2",
+    "jquery.cookie": "~1.4.0",
+    "fontawesome": "~4.3.0",
     "jquery.easing": "https://github.com/gdsmith/jquery.easing.git#~1.3.2",
-    "shufflejs": "https://github.com/Vestride/Shuffle.git#~3.1.1"
+    "foundation": "zurb/bower-foundation",
+    "prettyphoto": "https://github.com/scaron/prettyphoto.git",
+    "shufflejs": "https://github.com/Vestride/Shuffle.git#~3.1.1",
+    "quicksand": "https://github.com/razorjack/quicksand.git#~1.2.2"
   },
   "resolutions": {
     "jquery": ">= 2.1.0"
   },
   "authors": [
-    "Luis <luis@lmseo.com>"
+    "Luis Piedrahita<luis@lmseo.com>"
   ],
   "description": "argahs is a theme child for the Genesis framework based on the Novo theme",
   "keywords": [
