@@ -183,7 +183,7 @@ class ZP_SocialIcons_Widget extends WP_Widget {
 		$this->WP_Widget( 'zp_social_icons', __( 'ZP Social Icons', 'novo' ), $widget_ops, $control_ops );
 
 		/** Load CSS in <head> */
-		add_action( 'wp_head', array( $this, 'css' ) );
+		//add_action( 'wp_head', array( $this, 'css' ) );
 		
 		/** Load script */
 		//add_action('get_header', 'child_load_scripts');
