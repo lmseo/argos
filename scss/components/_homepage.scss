@@ -1,6 +1,8 @@
 /* Homepage Template adjustment 
  ------------------------------------------------------------ */ 
-
+.home #sidebar_container{
+	display:none;
+}
 .page-template-homepage-template-php{
 	.nav-primary{
 		margin-right:0;
