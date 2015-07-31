@@ -2,8 +2,6 @@
 add_import_path "bower_components/foundation/scss"
 add_import_path "bower_components/fontawesome/scss"
 add_import_path "include/shortcodes/scss"
-add_import_path "include/scss-components/"
-add_import_path "include/scss-components/widgets/"
 
 # Set this to the root of your project when deployed:
 http_path = "/"
