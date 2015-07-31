@@ -1,8 +1,8 @@
 /*!
 
- Theme Name: 333 
- Theme URL: http://www.lmseo.com/ 
- Description: 333 is a Theme child based on Novo theme is a 2-column Widget-ready child theme created for the Genesis Framework. 
+ Theme Name: Argos 
+ Theme URL: http://www.lmseo.com/themes/argos
+ Description: Argos is a Theme child based on Novo theme is a 2-column Widget-ready child theme created for the Genesis Framework. 
  Author: LMSEO
  Author URI: http://www.lmseo.com/ 
  Version: 1.0 
@@ -15,10 +15,10 @@
  License: GNU General Public License v2.0 (or later)
  License URI: http://www.opensource.org/licenses/gpl-license.php 
  */
-@import "compass/css3/border-radius";
-@import "compass/css3/transition";
-@import "compass/css3/images";
-@import "compass/css3/transform";
+//@import "compass/css3/border-radius";
+//@import "compass/css3/transition";
+//@import "compass/css3/images";
+//@import "compass/css3/transform";
 @import "settings";
 //@import "foundation";
 
@@ -59,24 +59,23 @@
 "foundation/components/type",
 //   "foundation/components/offcanvas",
 "foundation/components/visibility";
-@import "fonts";
+@import "components/fonts";
 @import "font-awesome";
-@import "typographical";
-@import "hyperlinks";
-@import "header";
-@import "footer";
+@import "components/typographical";
+@import "components/hyperlinks";
+@import "components/header";
+@import "components/footer";
 @import "shortcode";
-@import "portfolio";
-@import "sidebar";
-@import "homepage";
-@import "featured-page-blog";
-@import "page";
-@import "widgets";
-@import "comments";
-@import "top-link";
-@import "breadcrumbs";
-@import "forms";
-
+@import "components/portfolio";
+@import "components/sidebar";
+@import "components/homepage";
+@import "components/featured-page-blog";
+@import "components/page";
+@import "components/widgets";
+@import "components/comments";
+@import "components/top-link";
+@import "components/breadcrumbs";
+@import "components/forms";
 
 
 /* Box Sizing
@@ -84,9 +83,7 @@
 
 *,
 input[type="search"] {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing:    border-box;
-	box-sizing:         border-box;
+	box-sizing:border-box;
 }
 
 /* Float Clearing
@@ -330,7 +327,7 @@ h1.entry-title, h2.entry-title, h2.entry-title a, h2.entry-title a:visited, .ent
 	letter-spacing: -0.1rem;
 	line-height: 54px;
 	margin-bottom: 25px;
-	text-align: center;
+	text-align: center; 
 }
 h2.entry-title a:hover, .entry-title > a:hover {
 	color: #FF304E;
