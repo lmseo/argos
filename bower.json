@@ -12,7 +12,16 @@
     "foundation": "zurb/bower-foundation",
     "prettyphoto": "https://github.com/scaron/prettyphoto.git",
     "shufflejs": "https://github.com/Vestride/Shuffle.git#~3.1.1",
-    "quicksand": "https://github.com/razorjack/quicksand.git#~1.2.2"
+    "quicksand": "https://github.com/razorjack/quicksand.git#~1.2.2",
+    "jquery.scrollTo": "~2.1.1",
+    "TipTip": "https://github.com/drewwilson/TipTip.git",
+    "cycle": "https://github.com/malsup/cycle.git#~3.0.3",
+    "waypoints": "~3.1.1",
+    "Responsive-Off-Canvas-Menu": "https://github.com/dbushell/Responsive-Off-Canvas-Menu.git",
+    "loadcss": "https://github.com/filamentgroup/loadCSS.git#~0.1.7",
+    "jquery-migrate": "~1.2.1",
+    "angular": "~1.4.6",
+    "angular-sanitize": "~1.4.6"
   },
   "resolutions": {
     "jquery": ">= 2.1.0"
@@ -20,7 +29,7 @@
   "authors": [
     "Luis Piedrahita<luis@lmseo.com>"
   ],
-  "description": "argahs is a theme child for the Genesis framework based on the Novo theme",
+  "description": "argos is a theme child for the Genesis framework based on the Novo theme",
   "keywords": [
     "WordPress",
     "Genesis"
@@ -33,5 +42,6 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {}
 }
