@@ -3,6 +3,26 @@ module.exports = function(grunt) {
 	//require('load-grunt-tasks')(grunt);
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		jshint: {
+		    all: ['bin/js/<%= pkg.name %>.js']
+		},
+		svgmin: {
+	        options: {
+	            plugins: [
+				    { removeViewBox: false },               // don't remove the viewbox atribute from the SVG
+				    { removeUselessStrokeAndFill: false },  // don't remove Useless Strokes and Fills
+				    { removeEmptyAttrs: false }             // don't remove Empty Attributes from the SVG
+				]
+	        },
+	        dist: {
+	           files: [{
+					expand: true,                  // Enable dynamic expansion
+					cwd: 'bin/images/',                   // Src matches are relative to this path
+					src: ['**/*.svg'],   // Actual patterns to match
+					dest: 'images/'                  // Destination path prefix
+				}]
+	        }
+	    },
 		imagemin: {                          // Task
 			/*static: {                          // Target
 				options: {                       // Target options
@@ -19,9 +39,9 @@ module.exports = function(grunt) {
 			dynamic: {                         // Another target
 				files: [{
 					expand: true,                  // Enable dynamic expansion
-					cwd: 'images/',                   // Src matches are relative to this path
+					cwd: 'bin/images/',                   // Src matches are relative to this path
 					src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
-					dest: 'dist/images/'                  // Destination path prefix
+					dest: 'images/'                  // Destination path prefix
 				}]
 			}
 		},
@@ -31,7 +51,7 @@ module.exports = function(grunt) {
 				// or
 				map: {
 				  inline: false, // save all sourcemaps as separate files...
-				  annotation: 'dist/css/maps/' // ...to the specified directory
+				  annotation: 'bin/css/maps/' // ...to the specified directory
 				},
 				processors: [
 					require('pixrem')(), // add fallbacks for rem units
@@ -46,9 +66,16 @@ module.exports = function(grunt) {
 			}
 		},
 		watch:{
-			scripts: {
+			jsint: {
 		    files: ['js/*.js'],
-		    tasks: ['jshint', 'concat', 'uglify'],
+		    tasks: ['concat:internal', 'uglify:internal'],
+				options: {
+				  spawn: false,
+				}
+			},
+			jsind: {
+		    files: ['js/*.js'],
+		    tasks: ['concat:index', 'uglify:index'],
 				options: {
 				  spawn: false,
 				}
@@ -61,7 +88,7 @@ module.exports = function(grunt) {
 				}
 			},
 			cssdev: {
-				files: ['scss/*.scss'],
+				files: ['scss/*.scss', 'scss/**/*.scss','scss/**/**/*.scss'],
 				//tasks: ['sass:dist', 'postcss'],
 				tasks: ['sass:dist'],
 				options: {
@@ -71,7 +98,6 @@ module.exports = function(grunt) {
 			css: {
 				files: ['scss/*.scss', 'scss/**/*.scss','scss/**/**/*.scss'],
 				tasks: ['sass:dist', 'postcss'],
-				tasks: ['sass:dist'],
 				options: {
 				  spawn: false,
 				}
@@ -80,22 +106,79 @@ module.exports = function(grunt) {
 		concat: {
 		  options: {
 		    // define a string to put between each file in the concatenated output
-		    separator: '\n'
+		    separator: '\n',
+		    sourceMap:true
 		  },
-		  dist: {
+		  internal: {
 		    // the files to concatenate
-		    src: ['js/**/*.js'],
+		    src: [
+		    	'js/modernizr.custom.js',
+		    	'bower_components/jquery.easing/jquery.easing.min.js',
+		    	'bower_components/prettyphoto/js/jquery.prettyPhoto.js',
+		    	'bower_components/jquery.scrollTo/jquery.scrollTo.min.js',
+		    	'bower_components/TipTip/jquery.tipTip.minified.js',
+		    	'js/postlike.js',
+		    	'js/jquery.tools.js',
+		    	//'js/jquery.cycle.lite.js',
+		    	//'bower_components/waypoints/lib/jquery.waypoints.min.js', not compatible with jquery.custom.js
+		    	'js/waypoints.js',
+		    	'js/sidebar.js',
+		    	'js/jquery.custom.js',
+		    	/*js files for the contact form 7 plugin*/
+		    	'../../plugins/contact-form-7/includes/js/jquery.form.js',
+		    	'../../plugins/contact-form-7/includes/js/scripts.js',
+		    	'js/contact-form-7/ajax-loader.js',
+		    	//'bower_components/foundation/js/foundation.js',
+		    	//'/js/foundation/app.js'
+		    	],
 		    // the location of the resulting JS file
-		    dest: 'bin/js/<%= pkg.name %>.js'
+		    dest: 'js/dev/internal/main.js'
+		  },
+		  index: {
+		    // the files to concatenate
+		    src: [
+		    	'bower_components/jquery/dist/jquery.js',
+		    	'js/modernizr.custom.js',
+		    	'bower_components/jquery.easing/jquery.easing.min.js',
+		    	//'bower_components/prettyphoto/js/jquery.prettyPhoto.js',
+		    	'bower_components/jquery.scrollTo/jquery.scrollTo.min.js',
+		    	'bower_components/TipTip/jquery.tipTip.minified.js',
+		    	//'js/postlike.js',
+		    	'bower_components/waypoints/lib/jquery.waypoints.js', 
+		    	//'js/waypoints.js',
+		    	'js/sidebar.js',
+		    	'js/jquery.flexslider.js',
+		    	'js/jquery.custom.js',
+		    	//'bower_components/foundation/js/foundation.js',
+		    	//'/js/foundation/app.js'
+		    	],
+		    // the location of the resulting JS file
+		    dest: 'js/dev/index/main.js'
 		  }
 		},
 		uglify: {
-		    options: {
-		      banner: '! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> '
-		    },
-		    my_target: {
+			options: {
+			    	banner: ' /*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */',
+					sourceMap: true,
+			},
+		    internal: {
+		    	options: {
+					sourceMapName: 'bin/js/internal/main.min.js.map',
+					sourceMapIncludeSources: true,
+        			sourceMapIn: 'js/dev/internal/main.js.map',
+			    },
 				files: {
-				'js/<%= pkg.name %>.min.js': ['bin/js/<%= pkg.name %>.js']
+				'bin/js/internal/main.min.js': ['js/dev/internal/main.js']
+				}
+			},
+			index: {
+		    	options: {
+					sourceMapName: 'bin/js/index/main.min.js.map',
+					sourceMapIncludeSources: true,
+        			sourceMapIn: 'js/dev/index/main.js.map',
+			    },
+				files: {
+				'bin/js/index/main.min.js': ['js/dev/index/main.js']
 				}
 			}
 		},
@@ -106,22 +189,27 @@ module.exports = function(grunt) {
 					//compass:true,
 					trace:true,
 					//debugInfo:true,
-					lineNumbers:true
+					lineNumbers:true,
+					loadPath:['scss/','bower_components/foundation/scss','bower_components/fontawesome/scss']
 				},
-				files: {                         // Dictionary of files
-					'dev-style.css': 'scss/style.scss'
-				}
+				files: [{
+						expand: true,
+						cwd: 'scss/',
+						src: ['*.scss', '**/*.scss','**/**/*.scss'],
+						dest: '',
+						ext: '.css'
+					}]
 		    },
 		    dist: {                            // Target
 				options: {                       // Target options
 					style: 'expanded',
 					//compass:true,
-					loadPath:['bower_components/foundation/scss','bower_components/fontawesome/scss','include/shortcodes/scss']
+					loadPath:['scss/','bower_components/foundation/scss','bower_components/fontawesome/scss']
 				},
 					files: [{
 						expand: true,
 						cwd: 'scss/',
-						src: ['*.scss'],
+						src: ['*.scss', '**/*.scss','**/**/*.scss'],
 						dest: '',
 						ext: '.css'
 					}]
@@ -135,14 +223,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-postcss');
+	grunt.loadNpmTasks('grunt-svgmin');
 
   //tasks 
-	//grunt.registerTask('scss', ['sass:dev']);
-	grunt.registerTask('scssd', ['sass:dist']);
 	grunt.registerTask('default', ['concat', 'imagemin:dynamic', 'sass:dev','postcss' ]);
-	//grunt.registerTask('justjs', ['concat', 'uglify']);
-	grunt.registerTask('wt', ['watch']);
-	grunt.registerTask('wtcd', ['watch:cssdev']);
-	grunt.registerTask('wtc', ['watch:css']);
-	//grunt.registerTask('post', ['sass:dist','postcss']);
+	grunt.registerTask('jsi', ['concat:index','uglify:index']);
+	grunt.registerTask('jsn', ['concat:internal','uglify:internal']);
+	grunt.registerTask('js', ['concat:internal','uglify:internal','concat:index','uglify:index']);
+	grunt.registerTask('post', ['sass:dist','postcss']);
 };
