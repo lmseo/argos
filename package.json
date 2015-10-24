@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Argos is a WordPress child theme for the Genesis framework. It is based on the Novo theme by Zigzagpress.",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "critical": "^0.6.0"
+  },
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
+    "browser-sync": "^2.9.4",
+    "critical": "^0.6.0",
     "cssnano": "^2.1.1",
     "glob": "^5.0.14",
     "grunt": "^0.4.5",
@@ -18,9 +22,29 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-postcss": "^0.5.5",
     "grunt-sass": "^1.0.0",
+    "grunt-svgmin": "^2.0.1",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-cache": "^0.2.10",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssnano": "^1.1.0",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-php2html": "^0.2.0",
+    "gulp-postcss": "^5.1.10",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^1.1.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-size": "^2.0.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-svgmin": "^1.2.0",
+    "gulp-uglify": "^1.2.0",
+    "gulp-uncss": "^1.0.3",
+    "gulp-watch": "^4.3.4",
     "imagemin-mozjpeg": "^5.1.0",
     "load-grunt-tasks": "^3.2.0",
-    "pixrem": "^1.3.1"
+    "penthouse": "^0.3.6",
+    "pixrem": "^1.3.1",
+    "run-sequence": "^1.1.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
