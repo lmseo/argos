@@ -21,6 +21,59 @@ var uncss = require('gulp-uncss');
 var fs = require('fs');
 var browserSync = require('browser-sync').create();
 
+var requireDir = require('require-dir');
+var tasks = requireDir('./tasks');
+
+/*
+*Quick calls
+*/
+gulp.task('default', function(callback){
+	runSequence('intdevjs', 'intdistjs','inddevjs', 'inddistjs','portdevjs', 'portdistjs', callback);
+});
+
+//Watch
+gulp.task('watch', function () {
+  gulp.watch('scss/**/*.scss', ['sassruby']);
+});
+
+//index
+gulp.task('indexstyle', function(callback){
+	runSequence('sassruby', 'uncssindex','uncssindexmiss','criticalindex', callback);
+});
+gulp.task('indexjs', function(callback){
+	runSequence('inddevjs', 'inddistjs', callback);
+});
+//internal
+gulp.task('intstyle', function(callback){
+	runSequence('intsassruby', callback);
+});
+gulp.task('intjs', function(callback){
+	runSequence('intdevjs', 'intdistjs', callback);
+});
+
+//portfolio archive
+gulp.task('portarchstyle', function(callback){
+	runSequence('portarchsassruby', 'portarchuncss','portarchuncssmiss','portarchcritical', callback);
+});
+gulp.task('portjs', function(callback){
+	runSequence('portarchdevjs', 'portarchdistjs', callback);
+});
+//portfolio single
+gulp.task('portstyle', function(callback){
+	runSequence('portsassruby', 'portuncss','portuncssmiss','portcritical', callback);
+});
+gulp.task('portjs', function(callback){
+	runSequence('portdevjs', 'portdistjs', callback);
+});
+//Slider Template
+gulp.task('slidertempstyle', function(callback){
+	runSequence('slidertempsassruby', 'slidertempuncss','slidertempuncssmiss','slidertempcritical', callback);
+});
+gulp.task('slidertempjs', function(callback){
+	runSequence('slidertempdevjs', 'slidertempdistjs', callback);
+});
+
+
 /** Image Optimization*/
 gulp.task('images', function(){
     return gulp.src(['images/**/*.{png,jpg,gif}'])
@@ -144,7 +197,7 @@ gulp.task('uncssindexmiss',function(){
 gulp.task('criticalindex', function () {
     critical.generate({
         base: './',
-        src: 'index.html',
+        src: 'http://arch/',
         dest: 'bin/css/index/critical/styles.min.css.php',
         css: 'bin/css/index/uncss/style.css',
         width: 320,
@@ -384,7 +437,7 @@ gulp.task('portsassruby', function () {
     	'scss/',{
 	    	sourcemap: true,
 	    	style: 'expanded',
-	    	loadPath:['scss/','bower_components/foundation/scss','bower_components/fontawesome/scss']
+	    	loadPath:['scss/','bower_components/foundation/scss','bower_components/fontawesome/scss','bower_components/galereya/dist/scss']
     })
 	.pipe(autoprefixer('last 2 versions'))
     //.pipe(sourcemaps.init())
@@ -417,19 +470,11 @@ gulp.task('portuncssmiss',function(){
 gulp.task('portcritical', function () {
     critical.generate({
         base: './',
-        src: 'bath.html',
+        src: 'http://arch/portfolio/bathrooms/',
         dest: 'bin/css/internal/portfolio/critical/styles.min.css.php',
-        css: 'bin/css/internal/portfolio/uncss/complete/',
-        dimensions: [{
-			width: 320,
-			height: 480
-			},{
-			width: 768,
-			height: 1024
-			},{
-			width: 1280,
-			height: 960
-		}],
+        css: 'bin/css/internal/portfolio/uncss/complete/style.css',
+        width: 320,
+        height: 480,
         minify: true
     });
 });
@@ -533,52 +578,4 @@ gulp.task('slidertempcritical', function () {
 		}],
         minify: true
     });
-});
-/*
-*Quick calls
-*/
-gulp.task('default', function(callback){
-	runSequence('intdevjs', 'intdistjs','inddevjs', 'inddistjs','portdevjs', 'portdistjs', callback);
-});
-
-//Watch
-gulp.task('watch', function () {
-  gulp.watch('scss/**/*.scss', ['sassruby']);
-});
-
-//index
-gulp.task('indexstyle', function(callback){
-	runSequence('sassruby', 'uncssindex','uncssindexmiss','criticalindex', callback);
-});
-gulp.task('indexjs', function(callback){
-	runSequence('inddevjs', 'inddistjs', callback);
-});
-//internal
-gulp.task('intstyle', function(callback){
-	runSequence('intsassruby', callback);
-});
-gulp.task('intjs', function(callback){
-	runSequence('intdevjs', 'intdistjs', callback);
-});
-
-//portfolio archive
-gulp.task('portarchstyle', function(callback){
-	runSequence('portarchsassruby', 'portarchuncss','portarchuncssmiss','portarchcritical', callback);
-});
-gulp.task('portjs', function(callback){
-	runSequence('portarchdevjs', 'portarchdistjs', callback);
-});
-//portfolio single
-gulp.task('portstyle', function(callback){
-	runSequence('portsassruby', 'portuncss','portuncssmiss','portcritical', callback);
-});
-gulp.task('portjs', function(callback){
-	runSequence('portdevjs', 'portdistjs', callback);
-});
-//Slider Template
-gulp.task('slidertempstyle', function(callback){
-	runSequence('slidertempsassruby', 'slidertempuncss','slidertempuncssmiss','slidertempcritical', callback);
-});
-gulp.task('slidertempjs', function(callback){
-	runSequence('slidertempdevjs', 'slidertempdistjs', callback);
 });
