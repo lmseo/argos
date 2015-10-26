@@ -21,9 +21,6 @@ var uncss = require('gulp-uncss');
 var fs = require('fs');
 var browserSync = require('browser-sync').create();
 
-var requireDir = require('require-dir');
-var tasks = requireDir('./tasks');
-
 /*
 *Quick calls
 */
