@@ -4,6 +4,76 @@
  Portfolio Single Page 
 
 ------------------------------*/ 
+
+/*
+*Inline crital CSS for first browser paint
+*/
+//during dev set to false. during Dist = true
+$portDev = true;
+//Set to true if critical local not recommended for dist
+$criticalLocal = true;
+
+//Include critical path CSS
+add_action('wp_head','lmseo_portfolio_critical_css',1);
+function lmseo_portfolio_critical_css(){
+	$path= 'bin/css/internal/portfolio/critical/complete/styles.min.css.php';
+	global $portDev;
+	if($portDev){
+		echo '<style type="text/css">';
+		include $path;
+		echo '</style>';
+	}
+}
+/*
+*Removes default CSS
+*/
+add_action(  'wp_enqueue_scripts', 'lmseo_portfolio_styles'   );
+function lmseo_portfolio_styles(   ) {
+	global $portDev;
+	if($portDev){	
+		wp_dequeue_style('argos');
+		wp_deregister_style('argos');	
+	}else{
+		wp_dequeue_style('argos');
+		wp_deregister_style('argos');
+		wp_register_style(  'port-style', get_stylesheet_directory_uri(   ).'/bin/css/internal/portfolio/style.css' , '', '1.0' );
+		wp_enqueue_style(  'port-style'   );
+	}
+}
+
+//adds Asyn attribute to the script tag
+add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
+function add_defer_attribute($tag, $handle) {
+    if ( 'portfolio_js' !== $handle )
+        return $tag;
+    return str_replace( ' src', ' defer="defer" src', $tag );
+}
+
+add_action('wp_footer','lmseo_portfolio_load_css_asynchronously');
+function lmseo_portfolio_load_css_asynchronously(){
+	global $portDev, $criticalLocal;
+
+	if($portDev){
+		if($criticalLocal){ ?>
+		<script>
+		<?php include 'bower_components/loadcss/loadCSS.min.js';?>
+		loadCSS('<?php echo "/wp-content/themes/argo/bin/css/internal/portfolio/uncss/complete/style.css";?>');
+		</script>
+		<noscript><link href="/wp-content/themes/argo/bin/css/internal/portfolio/uncss/complete/style.css" rel="stylesheet"></noscript>
+  		<?php
+		}else{
+			?>
+			<script>
+			<?php include 'bower_components/loadcss/loadCSS.min.js';?>
+			loadCSS('<?php echo "https://489323192bc07f331d47-c06041d322f1ad6b39306f4da82d1689.ssl.cf1.rackcdn.com/wp-content/themes/argo/bin/css/internal/portfolio/uncss/complete/style.css";?>');
+			</script>
+			<noscript><link href="https://489323192bc07f331d47-c06041d322f1ad6b39306f4da82d1689.ssl.cf1.rackcdn.com/wp-content/themes/argo/bin/css/internal/portfolio/uncss/complete/style.css" rel="stylesheet"></noscript>
+			<?php
+		}
+	}
+}
+
+
 add_filter(  'genesis_breadcrumb_args', 'lmseo_single_portfolio_breadcrumb_args'  );
 function lmseo_single_portfolio_breadcrumb_args(  $args  ) {
     $args['prefix'] = '<div class="breadcrumbs"><div class="wrap">';
@@ -35,9 +105,9 @@ function single_portfolio_ie9_fix(){
 
 add_action( 'wp_enqueue_scripts', 'single_portfolio_name_scripts' );
 function single_portfolio_name_scripts() {
-	wp_enqueue_style(  'galereya-css');
-	wp_enqueue_script(  'galereya'  );
-	wp_enqueue_script( 'galereya-custom', get_stylesheet_directory_uri(  ) . '/js/custom.galereya.js',array( 'jquery', 'galereya' ), '1.0', true );
+	//wp_enqueue_style(  'galereya-css');
+	//wp_enqueue_script(  'galereya'  );
+	//wp_enqueue_script( 'galereya-custom', get_stylesheet_directory_uri(  ) . '/js/custom.galereya.js',array( 'galereya' ), '1.0', true );
 }
 
 remove_action( 	'genesis_loop', 'genesis_do_loop'  );
@@ -254,7 +324,6 @@ function zp_single_portfolio_template(  ) {
 	        </div>            
 	     	<?php 
 	     }
-		
 		//do_action( 'genesis_entry_footer' );
 	?>
 	</article>

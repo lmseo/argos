@@ -1,0 +1,82 @@
+/*!
+ Theme Name: Argos 
+ Theme URL: http://www.lmseo.com/themes/argos
+ Description: Argos is a child Theme based on the Novo theme which is a 2-column Widget-ready child theme created for the Genesis Framework. 
+ Author: LMSEO
+ Author URI: http://www.lmseo.com/ 
+ Version: 1.0 
+
+ Template: genesis
+ Template Version: 2.0
+ Tags: one-column, two-columns, right-sidebar, fixed-layout, custom-menu,  fluid-layout, sticky-post, theme-options, threaded-comments
+ 
+ License: GNU General Public License v2.0 (or later)
+ License URI: http://www.opensource.org/licenses/gpl-license.php 
+ */
+//@import "compass/css3/border-radius";
+//@import "compass/css3/transition";
+//@import "compass/css3/images";
+//@import "compass/css3/transform";
+@import "settings";
+@import "foundation";
+
+// Or selectively include components
+//@import
+//   "foundation/components/accordion",
+//   "foundation/components/alert-boxes",
+//   "foundation/components/block-grid",
+//"foundation/components/breadcrumbs",
+//   "foundation/components/button-groups",
+//   "foundation/components/buttons",
+//"foundation/components/clearing",
+//   "foundation/components/dropdown",
+//   "foundation/components/dropdown-buttons",
+//   "foundation/components/flex-video",
+//   "foundation/components/forms",
+//"foundation/components/grid",
+//   "foundation/components/inline-lists",
+//   "foundation/components/joyride",
+//   "foundation/components/keystrokes",
+//   "foundation/components/labels",
+//   "foundation/components/magellan",
+//   "foundation/components/orbit",
+//   "foundation/components/pagination",
+//   "foundation/components/panels",
+//   "foundation/components/pricing-tables",
+//   "foundation/components/progress-bars",
+//   "foundation/components/reveal",
+//   "foundation/components/side-nav",
+//   "foundation/components/split-buttons",
+//   "foundation/components/sub-nav",
+//   "foundation/components/switches",
+//   "foundation/components/tables",
+//   "foundation/components/tabs",
+//   "foundation/components/thumbs",
+//   "foundation/components/tooltips",
+//   "foundation/components/top-bar",
+//"foundation/components/type",
+//   "foundation/components/offcanvas",
+//"foundation/components/visibility";
+@import "components/fonts";
+@import "components/typographical";
+@import "components/hyperlinks";
+@import "components/animations";
+@import "components/header";
+@import "components/footer";
+@import "components/portfolio";
+@import "components/effects";
+@import "components/sidebar";
+@import "components/featured-page-blog";
+@import "components/page";
+@import "components/widgets";
+@import "components/comments";
+@import "components/top-link";
+@import "components/breadcrumbs";
+@import "components/forms";
+@import "components/flexslider";
+@import "components/shortcodes";
+@import "components/buttons";
+@import "components/search-app";
+@import "core";
+@import "components/galereya";
+@import "components/custom";

@@ -221,29 +221,54 @@ function zp_buttons_shortcode(  $atts, $content = null  ) {
 		'size' => '',
 		'color' => '',
 		'link' => '',
-		'rounded' => ''
+		'rounded' => '',
+		'id'=>'',
+		'radius'=>'',
+		'align'=>'',
+		'float'=>''
 	), $atts ) );
 	
 	$output = '';
-	
+
+	if (  $float == 'left'  ) {
+		$float = ' left';
+	}elseif (  $float == 'right'  ) {
+		$float = ' right';
+	}else{
+		$float = '';
+	}
+	if (  $align == 'center'  ) {
+		$align = ' text-center';
+	}elseif (  $align == 'left'  ) {
+		$align = ' text-left';
+	}elseif (  $align == 'right'  ) {
+		$align = ' text-right';
+	}else{
+		$align = '';
+	}
 	if( $color == 'default' )
 		$color = '';
 	
-	if (  $size == 'small'  ) {
-		$size = 'small-btn ';
-	}elseif (  $size == 'normal'  ) {
-		$size = '';
+	if (  $size == 'tiny'  ) {
+		$size = ' tiny ';
+	}elseif (  $size == 'small'  ) {
+		$size = ' small';
 	}elseif(  $size == 'large'  ) {
-		$size = 'large-btn ';
+		$size = ' large';
+	}elseif($size == 'expand'){
+		$size = 'expand';
 	}else {
 		$size = '';
 	}
-	
 	if (  $rounded == 'true'  ){
-		$rounded = 'rounded ';
+		$rounded = 'rounded';
+	}elseif( $radius == 'true' ){
+		$radius = ' radius';
 	}
-	
-	$output .= '<a href="'. $link . '" class=" button ' .$rounded .' '. $size . $color . '" >' . do_shortcode (  $content  ) . '</a>';
+	if($id != ''){
+		$link = get_page_link($id);
+	}
+	$output .= '<a href="'. $link . '" class=" button ' .$rounded . $radius.' '. $size . $color . '" >' . do_shortcode (  $content  ) . '</a>';
 	
 	return $output;
 }
@@ -319,7 +344,7 @@ add_shortcode(  'team_wrapper', 'zp_team_container'  );
 /**
 *	Slider Shortcode
 */
-
+$slider_script_output='';
 function zp_slider(  $atts, $content = null  ){
 	extract(  shortcode_atts(  array(
 		'name' => '',
@@ -366,7 +391,7 @@ function zp_slider(  $atts, $content = null  ){
 			$output.= '<li style="background-image: url('.$images.'); height: '.$height.'">';
 			
 				$output .= '<div class="li-wrap">';
-				$mobile_otput .='<div class="wrap">';
+				$mobile_otput .='<div class="slider_shortcode_mobile_element"><div class="wrap"><div class="small-12 column">';
 				
 				if( $captions ){
 					$mobile_otput .= '<h3 class="text-center">'.$captions.'</h3>';
@@ -382,7 +407,7 @@ function zp_slider(  $atts, $content = null  ){
 					$output .= '<p><a href="'.$link.'" >'.$button.'</a></p>';
 				}
 				
-				$mobile_otput .= '</div>';
+				$mobile_otput .= '</div></div></div>';
 				$output .=  '</div>';
 
 
@@ -392,13 +417,18 @@ function zp_slider(  $atts, $content = null  ){
 		endwhile;
 		wp_reset_query();
 
-	    $output .= '</ul> </div><script type="text/javascript">jQuery.noConflict();jQuery(document).ready(function(e){function t(t){var n=e(".'.$name.' .slides li").not(".clone").eq(t.animatingTo),r=e(".'.$name.' .slides li").not(n);r.find("h3").animate({"margin-top":0,opacity:0},1e3);r.find(".excerpt").animate({left:"-680px",opacity:0},1e3);n.find("h3").animate({"margin-top":"20%",opacity:1},1e3);n.find(".excerpt").animate({left:0,opacity:1},1e3)}e(".'.$name.'").flexslider({animation:"'.$animation.'",slideDirection:"horizontal",slideshowSpeed:6e3,animationDuration:7e3,directionNav:'.$directionnav.',controlNav:';
+	    $output .= '</ul> </div>';
+	    global $slider_script_output;
+
+	    $slider_script_output.='<script type="text/javascript" async="async">jQuery.noConflict();jQuery(document).ready(function(e){function t(t){var n=e(".'.$name.' .slides li").not(".clone").eq(t.animatingTo),r=e(".'.$name.' .slides li").not(n);r.find("h3").animate({"margin-top":0,opacity:0},1e3);r.find(".excerpt").animate({left:"-680px",opacity:0},1e3);n.find("h3").animate({"margin-top":"20%",opacity:1},1e3);n.find(".excerpt").animate({left:0,opacity:1},1e3)}e(".'.$name.'").flexslider({animation:"'.$animation.'",slideDirection:"horizontal",slideshowSpeed:6e3,animationDuration:7e3,directionNav:'.$directionnav.',controlNav:';
 	   if($controlnav=='true' or $controlnav=='false'){
-	    	$output .= $controlnav;
+	    	$slider_script_output .= $controlnav;
 	    }elseif($controlnav=='thumbnails'){
-	    	$output .= '"'.$controlnav.'"';
+	    	$slider_script_output .= '"'.$controlnav.'"';
 	    }
-		$output .=',pauseOnAction:true,pauseOnHover:true,animationLoop:true,start:t,before:t});e(".'.$name.'").hover(function(){e(this).children("ul.flex-direction-nav").css({display:"block"})},function(){e(this).children("ul.flex-direction-nav").css({display:"none"})})})</script></div>';
+		$slider_script_output .=',pauseOnAction:true,pauseOnHover:true,animationLoop:true,start:t,before:t});e(".'.$name.'").hover(function(){e(this).children("ul.flex-direction-nav").css({display:"block"})},function(){e(this).children("ul.flex-direction-nav").css({display:"none"})})})</script>';
+		//do_action('lmseo_slider_script',$scriptOutput);
+		$output .= '</div>';
 		//removing extra <br>
 		$mobile_otput .= '</div>';
 		$output = $output . $mobile_otput;
@@ -406,10 +436,19 @@ function zp_slider(  $atts, $content = null  ){
 		$New     = array( '','' );
 		$output = str_replace( $Old, $New, $output );
 		
+		
 		return $output;
 }
 
 add_shortcode(  'slider', 'zp_slider'  );
+
+add_action( 'wp_footer','lmseo_slider_script', 1000);
+function lmseo_slider_script(){
+	global $slider_script_output;
+	if($slider_script_output!=''){
+		echo $slider_script_output;
+	}
+}
 
 /**
 **	Alert Box
@@ -460,18 +499,39 @@ add_shortcode( 'li', 'zp_list_li' );
 */
 function zp_column_wrapper(  $atts, $content = null  ) {
 	extract(  shortcode_atts(  array(
-		'num' => '',
-		'last' => ''
+		'dataequalizer'=>'false',
+		'dataequalizermq'=>'',
+		'class'=>''
 	), $atts ) );
-	
+	//echo $dataequalizer ."-". $dataequalizermq."<br>";
+
+	//$mediaSizes = array('small-up','medium-up','large-up');
 	$output='';
-	
-	$output .= '<div class="columns-wrapper">'.do_shortcode( $content ).'</div><div class="clearfix"></div>';
+	$cssclasses = 'row';
+
+	if($class!= '' ){
+		$cssclasses .=  ' ' . $class;
+	}
+	//$output .= '<div class="columns-wrapper">'.do_shortcode( $content ).'</div><div class="clearfix"></div>';
+	if($dataequalizer=='true'){
+		//foreach ($mediaSizes as $key => $value) {
+			//echo $dataequalizermq .'-'. $value ."<br>";
+		if($dataequalizermq != ''){
+			echo $value;
+			$output .= '<div class="'.$cssclasses .'" data-equalizer data-equalizer-mq="'.$dataequalizermq.'">'.do_shortcode( $content ).'</div>';
+		}else{
+			$output .= '<div class="'.$cssclasses .'" data-equalizer>'.do_shortcode( $content ).'</div>';
+		}
+		//}
+	}else{
+		$output .= '<div class="'.$cssclasses .'">'.do_shortcode( $content ).'</div>';
+	}
 	
 	//removing extra <br>
 	$Old     = array( '<br />', '<br>' );
 	$New     = array( '','' );
 	$output = str_replace( $Old, $New, $output );
+
 	
 	return $output;
 }
@@ -483,11 +543,23 @@ add_shortcode(  'col_wrapper', 'zp_column_wrapper'  );
 */
 function zp_2columns(  $atts, $content = null  ) {
 	extract(  shortcode_atts(  array(
+		'dataequalizer'=>'false',
+		'class'=> ''
 	), $atts ) );
-	
+
+	$cssclasses = 'medium-6 columns';
 	$output='';
-	
-	$output .= '<div class="one-half columns">'.do_shortcode( $content ).'</div>';
+
+	if($class!= '' ){
+		$cssclasses .=  ' ' . $class;
+	}
+
+	if($dataequalizer=='true'){
+		$output .= '<div class="'.$cssclasses .'" data-equalizer-watch>'.do_shortcode( $content ).'</div>';
+	}else{
+		$output .= '<div class="'.$cssclasses .'">'.do_shortcode( $content ).'</div>';
+	}
+	//$output .= '<div class="one-half columns">'.do_shortcode( $content ).'</div>';
 	
 	//removing extra <br>
 	$Old     = array( '<br />', '<br>' );
@@ -499,11 +571,23 @@ add_shortcode(  'col2', 'zp_2columns'  );
 
 function zp_2columns_last(  $atts, $content = null  ) {
 	extract(  shortcode_atts(  array(
+		'dataequalizer'=>'false',
+		'class'=> ''
 	), $atts ) );
 	
 	$output='';
-	
-	$output .= '<div class="one-half columns nomargin">'.do_shortcode( $content ).'</div>';
+	$cssclasses = 'medium-6 columns';
+
+	if($class!= '' ){
+		$cssclasses .=  ' ' . $class;
+	}
+
+	if($dataequalizer=='true'){
+		$output .= '<div class="'.$cssclasses .'" data-equalizer-watch>'.do_shortcode( $content ).'</div>';
+	}else{
+		$output .= '<div class="'.$cssclasses .'">'.do_shortcode( $content ).'</div>';
+	}
+	//$output .= '<div class="medium-6 columns">'.do_shortcode( $content ).'</div>';
 	
 	//removing extra <br>
 	$Old     = array( '<br />', '<br>' );
@@ -523,7 +607,7 @@ function zp_3columns(  $atts, $content = null  ) {
 	), $atts ) );
 	
 	$output='';
-	$output .= '<div class="one-third columns">'.do_shortcode( $content ).'</div>';
+	$output .= '<div class="medium-4 columns">'.do_shortcode( $content ).'</div>';
 	
 	//removing extra <br>
 	$Old     = array( '<br />', '<br>' );
@@ -540,7 +624,7 @@ function zp_3columns_last(  $atts, $content = null  ) {
 	
 	$output='';
 	
-	$output .= '<div class="one-third columns nomargin">'.do_shortcode( $content ).'</div>';
+	$output .= '<div class="medium-4 columns">'.do_shortcode( $content ).'</div>';
 	
 	//removing extra <br>
 	$Old     = array( '<br />', '<br>' );
@@ -561,7 +645,7 @@ function zp_4columns(  $atts, $content = null  ) {
 	$output='';
 	
 	
-	$output .= '<div class="one-fourth columns">'.do_shortcode( $content ).'</div>';
+	$output .= '<div class="medium-3 columns">'.do_shortcode( $content ).'</div>';
 	
 	//removing extra <br>
 	$Old     = array( '<br />', '<br>' );
@@ -579,7 +663,7 @@ function zp_4columns_last(  $atts, $content = null  ) {
 	
 	$output='';
 	
-	$output .= '<div class="one-fourth columns nomargin">'.do_shortcode( $content ).'</div>';
+	$output .= '<div class="medium-3 columns">'.do_shortcode( $content ).'</div>';
 	
 	//removing extra <br>
 	
@@ -601,10 +685,11 @@ function zp_twothird_columns(  $atts, $content = null  ) {
 		'last' => ''
 	), $atts ) );
 	
-	$last = ($last == 'true' ) ? "nomargin" : ' ';
+	///$last = ($last == 'true' ) ? "nomargin" : ' ';
+
 	
 	$output='';
-	$output .= '<div class="two-third columns '.$last.'">'.do_shortcode( $content ).'</div>';
+	$output .= '<div class="medium-8 columns '.$last.'">'.do_shortcode( $content ).'</div>';
 	
 	//removing extra <br>
 	$Old     = array( '<br />', '<br>' );
@@ -624,11 +709,11 @@ function zp_threefourth_columns(  $atts, $content = null  ) {
 		'last' => ''
 	), $atts ) );
 	
-	$last = ($last == 'true' ) ? "nomargin" : ' ';
+	///$last = ($last == 'true' ) ? "nomargin" : ' ';
 	
 	$output='';
 	
-	$output .= '<div class="three-fourth columns '.$last.'">'.do_shortcode( $content ).'</div>';
+	$output .= '<div class="medium-9 columns '.$last.'">'.do_shortcode( $content ).'</div>';
 	
 	//removing extra <br>
 	$Old     = array( '<br />', '<br>' );
@@ -675,7 +760,7 @@ function zp_portfolio(  $atts, $content = null  ) {
 	
 	$filter = ($filter == "true" )? true:false;
 	/*zp_portfolio_shortcode*/
-	$output = zp_portfolio_shortcode( $items, $type, $effect );
+	$output = lmseo_portfolio_shortcode( $items, $type, $effect );
 
 	$Old     = array( '<br />', '<br>' );
 	$New     = array( '','' );

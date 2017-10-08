@@ -9,10 +9,37 @@ add_image_size(  'latest_portfolio_widget', 70, 70, TRUE  );
 add_image_size( '3col', 306, 240, TRUE  );
 add_image_size( 'portfolio_single', 980, 737, TRUE  );
 
+/*
+*Creates a custom excerpt.
+*/
+function get_excerpt_by_id($post_id, $length=35){
+    $the_post = get_post($post_id); //Gets post ID
+    $the_excerpt = $the_post->post_content; //Gets post_content to be used as a basis for the excerpt
+    $excerpt_length = $length; //Sets excerpt length by word count
+    $the_excerpt = strip_tags(strip_shortcodes($the_excerpt)); //Strips tags and images
+    $words = explode(' ', $the_excerpt, $excerpt_length + 1);
+
+    if(count($words) > $excerpt_length) :
+        array_pop($words);
+        array_push($words, '…');
+        $the_excerpt = implode(' ', $words);
+    endif;
+
+    $the_excerpt = $the_excerpt ;
+
+    return $the_excerpt;
+}
+
+/*
+*Check if the current page is the login page.
+*/
+function is_wp_login() {
+	return 'wp-login.php' == basename( $_SERVER['SCRIPT_NAME'] );
+}
+
 /**
  * Will print out the grass on top of the "More Information" widget box that is hooked to genesis_before_footer
 */
-
 function lmseo_before_more_information() { ?>
 	<div class="before-more-information"></div>
 <?php 
@@ -31,7 +58,6 @@ function zp_portfolio_items_values( $columns ){
 		$values['size'] = '2col';
 		$values['class'] = '-2col';
 	}
-	
 	if(  $columns == 3  )
 	{
 		$values['size'] = '3col';
@@ -269,12 +295,11 @@ wp_reset_query(  );
 
 function lmseo_portfolio_template(  $num_items, $type ){
 	global $post, $paged, $wp_query;	
-	
 	/** Enqueue necessary scripts */
-	wp_enqueue_script(  'modernizr_custom'  );	
-	wp_enqueue_script(  'classie'  );	
-	wp_enqueue_script(  'thumbnailGridEffects'  );
-	wp_enqueue_script(  'jquery_prettyphoto_js'  );
+	//wp_enqueue_script(  'modernizr_custom'  );	
+	//wp_enqueue_script(  'classie'  );	
+	//wp_enqueue_script(  'thumbnailGridEffects'  );
+	//wp_enqueue_script(  'jquery_prettyphoto_js'  );
 							
 	/** get appropriate columns, image height and image width*/
 	$_values = lmseo_portfolio_items_values( 3 );
@@ -297,8 +322,10 @@ function lmseo_portfolio_template(  $num_items, $type ){
 			$args= array( 
 					'posts_per_page' =>$num_items, 
 					'post_type' => 'portfolio',
-					'paged' => $paged,	
-					'portfolio-category' => $term->slug
+					'paged' => $paged,
+					'portfolio-category' => $term->slug,
+					'orderby' => 'title' , 
+					'order' => 'ASC'
 				 );				
 		
 				query_posts( $args );
@@ -308,10 +335,10 @@ function lmseo_portfolio_template(  $num_items, $type ){
 			$args= array( 
 		
 					'posts_per_page' =>$num_items, 
-		
 					'post_type' => 'portfolio',
-		
 					'paged' => $paged,	
+					'orderby' => 'title' , 
+					'order' => 'ASC'
 				 );				
 		query_posts( $args );
 		
@@ -330,7 +357,6 @@ function lmseo_portfolio_template(  $num_items, $type ){
 			
 			$t=get_the_title(  );
 			$permalink=get_permalink(  );	
-					
 			$content = get_the_content_limit( 50, '' );	                            
 																
 			$thumbnail = wp_get_attachment_url(  get_post_thumbnail_id(  $post->ID  )  ); 
@@ -491,7 +517,87 @@ wp_reset_query(  );
 	
 }
 
+/**
+ * Display items in each page 
+ * @param $items - items per page
+ */
 
+function lmseo_display_portfolio_items(  $items , $type ){
+	global $post,$wp_query;
+	
+	/** get appropriate columns, image height and image width*/
+	$_values = zp_portfolio_items_values( 3 );
+	$num_pages = zp_get_portfolio_pages( $items  );
+	
+	$flag = 0;
+	$p_num =  zp_get_portfolio_items();
+	$output = '';
+	$p_array = array();
+	$final = array();
+		
+	if( is_tax('portfolio-category')){
+		
+	$term =	$wp_query->queried_object;
+		$args= array( 
+				'posts_per_page' =>  -1, 
+				'post_type' => 'portfolio',
+				'portfolio-category' => $term->slug
+			 );				
+			query_posts( $args );
+
+
+	}else{
+
+		$args= array( 
+			'posts_per_page' =>-1, 
+			'post_type' => 'portfolio'
+		 );		
+		 query_posts( $args );
+	}
+
+
+	
+	if(  have_posts( ) ) {											
+ 		while (  have_posts(  )  ) {
+			the_post(  ); 
+			$flag++;
+			$permalink = get_permalink(  );
+			$t = get_the_title(  );
+
+			$img = wp_get_attachment_image_src( get_post_thumbnail_id(  $post->ID  ), $_values['size']);			
+			$video_url = get_post_meta( $post->ID, 'zp_video_url_value', true);	
+			
+			if(  $type == 'portfolio'  ){
+				$link = $permalink;
+			}else{
+				if( $video_url != '' ){
+					$link = zp_video_preg_match( $video_url );
+					$rel = 'rel="prettyPhoto[pp_gal]"';
+				}else{
+					$link = wp_get_attachment_url(  get_post_thumbnail_id(  $post->ID  )  );
+					$rel = 'rel="prettyPhoto[pp_gal]"';
+				}
+			}			
+			
+			array_push($p_array, array( 'title' => $t,'img'=>$img[0], 'link' => $link ));
+			$p_num--;
+
+			if( ($flag == $items) ){
+				array_push($final , $p_array );
+				$p_array = array();
+				$flag=0;
+			}else if( ($flag != $items) && ($p_num == 0 ) ){
+				array_push($final , $p_array );
+				$p_array = array();	
+				$flag=0;
+			}
+		}
+	}
+	wp_reset_query(  );
+
+	$obj = json_decode (json_encode ($final), FALSE);
+	return $obj;
+}
 /**
  * Display items in each page 
  * @param $items - items per page
@@ -573,7 +679,62 @@ function zp_display_portfolio_items(  $items , $type ){
 	$obj = json_decode (json_encode ($final), FALSE);
 	return $obj;
 }
+/**
+ * Creates Script List for portfolio items. 
+ */
+ 
+function lmseo_portfolio_list(  $items , $type){
+	
+	$output = '';
+	$flag1 = 0;
+	$p_num =  zp_get_portfolio_items( );
+	$flag2 = 0;
+	$counter = 0;
 
+	//retrieve all the items
+	$item_list = zp_display_portfolio_items( $items , $type );
+
+	// check if is is portfolio / gallery page
+	if(  $type == 'portfolio'  ){
+		$rel = '';
+	}else{
+		$rel = 'rel="prettyPhoto[pp_gal]"';
+	}	
+	
+	foreach( $item_list as  $list ){
+		$counter++;
+		$output .= 'page'.$counter.' : [';
+			foreach( $list as $list2){
+						$output .= '\'<a href="'.$list2->link.'" title="'.$list2->title.'" '.$rel.'><span class="portfolio_overlay"><h4 class="portfolio_title">'.$list2->title.'</h4></span><img src="'.$list2->img.'" class="" alt="'.$list2->title.'"></a>\'';		
+						if( ($flag1 < $items-1) && ($p_num != 1) ){
+							$output .= ',';	
+							$flag1++;
+						}else{
+							$output .= '';
+							$flag1=0;	
+						}
+						$p_num--;
+						
+			}
+		$output .= ']';			
+		if( $flag2 < zp_get_portfolio_pages( $items )- 1 ){
+			$output .= ',';	
+			$flag2++;
+		}else{
+			$output .= '';
+			$flag=0;
+		}
+	}
+?>
+        <script>
+		 /* <![CDATA[ */  
+			var allImages = { <?php echo $output; ?>};
+		/* ]]> */ 
+        </script>
+
+<?php	
+
+}
 /**
  * Creates Script List for portfolio items. 
  */
@@ -662,7 +823,7 @@ global $post;
     <div class = "related_portfolio">		
         <div class="section-title"> <h4><?php echo genesis_get_option( 'zp_related_portfolio_title' , ZP_SETTINGS_FIELD ); ?></h4></div>
     </div>
-   <div class="related_container "><?php
+   <div class="related_container clearfix"><?php
 	if( have_posts() ) {				  
 		while ( have_posts() ){
 			the_post(); 
@@ -671,7 +832,7 @@ global $post;
 			$permalink=get_permalink();
 			$thumbnail= wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) );
 			?>
-			<div class="element element-3col <?php echo zp_portfolio_items_term( $post->ID ); ?>">
+			<div class="element small-12 large-4 <?php echo zp_portfolio_items_term( $post->ID ); ?>">
 			<a href="<?php echo $permalink; ?>" title="<?php echo $t; ?>">
 			<span class="portfolio_overlay">
 			<h4 class="portfolio_title"><?php echo $t; ?></h4>
@@ -705,7 +866,7 @@ global $post;
 				$thumbnail= wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) );
 
 				?>
-				<div class="element element-3col <?php echo zp_portfolio_items_term( $post->ID ); ?>">
+				<div class="element small-12 large-4 <?php echo zp_portfolio_items_term( $post->ID ); ?>">
          			<a href="<?php echo $permalink; ?>" title="<?php echo $t; ?>">
                 	<span class="portfolio_overlay">
                     <h4 class="portfolio_title"><?php echo $t; ?></h4>
@@ -832,56 +993,46 @@ function lmseo_portfolio_shortcode( $num_items, $type, $effect ){
 	global $post, $paged, $wp_query;	
 	
 	/** Enqueue necessary scripts */
-	wp_enqueue_script(  'modernizr_custom'  );	
-	wp_enqueue_script(  'classie'  );	
-	wp_enqueue_script(  'thumbnailGridEffects'  );
-	wp_enqueue_script(  'jquery_prettyphoto_js'  );
+	//wp_enqueue_script(  'modernizr_custom'  );	
+	//wp_enqueue_script(  'classie'  );	
+	//wp_enqueue_script(  'thumbnailGridEffects'  );
+	//wp_enqueue_script(  'jquery_prettyphoto_js'  );
 							
 	/** get appropriate columns, image height and image width*/
-	$_values = zp_portfolio_items_values( 3 );
+	$_values = lmseo_portfolio_items_values( 3 );
 	
 	/* creates portfolio items list */
 	zp_portfolio_list( $num_items, $type );
 	
 	/** determines if it will be a portfolio layout or gallery layout*/
-	$class = ( $type == 'portfolio' ) ? 'element' : 'gallery';
-	
-	
+	$class = ( $type == 'portfolio' ) ? 'element' : 'gallery';	
 	$html='';
 	$nav_button = '';
 	$output = '';
-	
-
-		if( is_tax('portfolio-category')){
-
+	if( is_tax('portfolio-category')){
 		$term =	$wp_query->queried_object;
+		$args= array( 
+			'posts_per_page' =>$num_items, 
+			'post_type' => 'portfolio',
+			'paged' => $paged,	
+			'portfolio-category' => $term->slug
+		 );				
 
-			$args= array( 
-					'posts_per_page' =>$num_items, 
-					'post_type' => 'portfolio',
-					'paged' => $paged,	
-					'portfolio-category' => $term->slug
-				 );				
-		
-				query_posts( $args );
+		query_posts( $args );
 
-		}else{
-		
-
-			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; 
-	
-			$args= array(		
+	}else{
+		$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; 
+		$args= array(		
 				'posts_per_page' =>$num_items, 		
 				'post_type' => 'portfolio',		
 				'paged' => $paged,	
 			 );				
-			query_posts( $args );
-		
-		}
-
+		query_posts( $args );
+	}
 	$output .= '<div class="portfolio_shortcode">';
 	$output .= '<section class="zp-grid-wrapper">';
-	$output .= '<div class="zp-grid '.zp_portfolio_style_effects( $effect ).'">';
+	$output .= '<div class="'.zp_portfolio_style_effects( $effect ).'">';
+	$output .= '<div class="portfolio_archive_element_wrapper wrap medium-collapse">';
 
 	if(  have_posts( ) ) {											
  		while (  have_posts(  )  ) {
@@ -892,7 +1043,7 @@ function lmseo_portfolio_shortcode( $num_items, $type, $effect ){
 					
 			$content = get_the_content_limit( 50, '' );	                            
 
-				$content = get_the_content_limit( 50, '' );
+			//$content = get_the_content_limit( 50, '' );
 																
 			$thumbnail = wp_get_attachment_url(  get_post_thumbnail_id(  $post->ID  )  ); 
 			$video_url = get_post_meta( $post->ID, 'zp_video_url_value', true);					
@@ -908,37 +1059,34 @@ function lmseo_portfolio_shortcode( $num_items, $type, $effect ){
 					$link = wp_get_attachment_url(  get_post_thumbnail_id(  $post->ID  )  );
 					$rel = 'rel="prettyPhoto[pp_gal]"';
 				}
-			}
-			
-					
-			/** generate the final item HTML */
-			$html.= '<div class="element '.$class.''.$_values['class'].' "><a href="'.$link.'" title="'.$t.'" '.$rel.'><span class="portfolio_overlay"><span class="portfolio_title">'.$t.'</span></span>'.get_the_post_thumbnail( $post->ID, $_values['size'] , array('alt' => $t) ).'</a></div>';
+			}					
+		/** generate the final item HTML */
+		//$html.= '<div class="element '.$class.''.$_values['class'].' "><a href="'.$link.'" title="'.$t.'" '.$rel.'><span class="portfolio_overlay"><span class="portfolio_title">'.$t.'</span></span>'.get_the_post_thumbnail( $post->ID, $_values['size'] , array('alt' => $t) ).'</a></div>';
+			$last_post_class="";
+ 			if($wp_query->current_post + 1 == $wp_query->post_count){
+ 				$last_post_class="end";
+ 			}
+			$html.= '<div class="portfolio_archive_element ' . $_values['fz_class']. ' columns '.$last_post_class.'"><a href="'.$link.'" title="'.$t.'" '.$rel.'><span class="portfolio_overlay"><h4 class="portfolio_title">'.$t.'</h4></span>'.get_the_post_thumbnail( $post->ID, $_values['size'] , array('alt' => $t) ).'</a></div>';
 		
 			
 		}
 	}		
-			$output .= $html;	
-	        $output .= '</div><nav class="zp_portfolio_nav">';
-			$i=0;
-			while( $i < zp_get_portfolio_pages( $num_items ) ){
-				if($i == 0){
-					$nav_button .= '<a class="zp-current"></a>';	
-				}else{
-					$nav_button .= '<a></a>';	
-				}		
-				$i++;
-			}
-			
-			$output .=  $nav_button; 			
-			
-	$output .= '</nav></section>';
-	
+	$output .= $html;	
+    $output .= '</div><nav class="zp_portfolio_nav">';
+	$i=0;
+	while( $i < zp_get_portfolio_pages( $num_items ) ){
+		if($i == 0){
+			$nav_button .= '<a class="zp-current"></a>';	
+		}else{
+			$nav_button .= '<a></a>';	
+		}		
+		$i++;
+	}
+	$output .=  $nav_button; 			
+	$output .= '</nav></div></section>';
 	$output .= '</div>';
-	
-wp_reset_query(  );
-
-return $output;
-
+	wp_reset_query(  );
+	return $output;
 }
 
 
@@ -1289,13 +1437,15 @@ function lmseo_get_attachment( $attachment, $imageSize='thumbnail') {
  *  @param int/string $imagesize the image size 
 */
 
+$page_gallery_js = '';
+
 if ( !function_exists( 'lmseo_page_gallery' ) ) {
     function lmseo_page_gallery($postid, $imagesize, $slideshow = false, $thumbs = false) { 
-        ?>
-            <script type="text/javascript">		
+       global $page_gallery_js ;
+       $page_gallery_js = '<script type="text/javascript">		
 			jQuery.noConflict();	
         		jQuery(document).ready(function($){
-                        $("#slider-<?php echo $postid; ?>").flexslider({
+                        $("#slider-'. $postid.'").flexslider({
 							autoplay:true,
         				    slideshow: true,
                             controlNav: false,
@@ -1306,8 +1456,7 @@ if ( !function_exists( 'lmseo_page_gallery' ) ) {
 							pauseOnHover:true
                         });
         		});
-        	</script>
-        <?php 
+        	</script>';
 		    
         // get all of the attachments for the post
         $args = array(
@@ -1321,7 +1470,7 @@ if ( !function_exists( 'lmseo_page_gallery' ) ) {
         );
         $attachments = get_posts($args);
         if( !empty($attachments) ) {
-            echo "<div class='post_slider flexslider' id='slider-$postid'>";
+            echo "<div class='post_slider flexslider' id='slider-$postid' style=\"height:750px\">";
             echo '<ul class="slides">';
 
             foreach( $attachments as $attachment ) {
@@ -1343,6 +1492,13 @@ if ( !function_exists( 'lmseo_page_gallery' ) ) {
 
         }
     }
+}
+add_action( 'wp_footer','lmseo_gallery_script', 1000);
+function lmseo_gallery_script(){
+	global $page_gallery_js;
+	if($page_gallery_js!=''){
+		echo $page_gallery_js;
+	}
 }
 /**
  *	Output Audio

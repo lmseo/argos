@@ -1,0 +1,308 @@
+/* 
+	* Individual grid effects
+	*/
+	/*
+	* Fall down / scale up 
+	*/
+	.zp-effect-fall.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: fallDown 0.6s forwards;
+		animation: fallDown 0.6s forwards;
+	}
+	.zp-effect-fall.zp-effect-active div a:nth-child(2),
+	.zp-effect-fall.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: scaleUpFadeIn 0.6s forwards;
+		animation: scaleUpFadeIn 0.6s forwards;
+	}
+	/* Slide and reveal */
+	.zp-effect-slide.zp-effect-active div:not(.zp-empty) a:first-child {
+		z-index: 100;
+		overflow: hidden;
+		margin: 0;
+		-webkit-animation: slideOut 0.5s forwards;
+		animation: slideOut 0.5s forwards;
+	}
+
+	.zp-effect-slide.zp-effect-active a:nth-child(2) {
+		visibility: visible;
+	}
+
+	.zp-effect-slide.zp-effect-active div:not(.zp-empty) a:only-child {
+		-webkit-animation: fadeOut 0.5s forwards;
+		animation: fadeOut 0.5s forwards;
+	}
+
+	.zp-effect-slide.zp-effect-active div.zp-empty a {
+		-webkit-animation: fadeIn 0.5s forwards;
+		animation: fadeIn 0.5s forwards;
+	}
+
+	/* Fall and rotate */
+	.zp-effect-fallrotate.zp-effect-active div:not(.zp-empty) a:first-child {
+		z-index: 10;
+		-webkit-animation: fallRotate 0.6s ease-in forwards;
+		animation: fallRotate 0.6s ease-in forwards;
+	}
+
+	.zp-effect-fallrotate.zp-effect-active div a:nth-child(2),
+	.zp-effect-fallrotate.zp-effect-active div.zp-empty a {
+		visibility: visible;
+	}
+
+	.zp-effect-fallrotate.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: fadeIn 0.6s forwards;
+		animation: fadeIn 0.6s forwards;
+	}
+
+	.zp-effect-fallrotate div:nth-child(4) { z-index: 1; } /* order for correct overlapping */
+	.zp-effect-fallrotate div:nth-child(5) { z-index: 2; }
+	.zp-effect-fallrotate div:nth-child(6) { z-index: 3; }
+	.zp-effect-fallrotate div:first-child { z-index: 4; }
+	.zp-effect-fallrotate div:nth-child(2) { z-index: 5; }
+	.zp-effect-fallrotate div:nth-child(3) { z-index: 6; }
+
+	/* Scale and rotate */
+	.zp-effect-scalerotate.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: scaleRotateOut 0.6s forwards;
+		animation: scaleRotateOut 0.6s forwards;
+	}
+
+	.zp-effect-scalerotate.zp-effect-active div a:nth-child(2),
+	.zp-effect-scalerotate.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: scaleRotateIn 0.6s forwards;
+		animation: scaleRotateIn 0.6s forwards;
+	}
+
+	.zp-effect-scalerotate.zp-effect-active div:not(.zp-empty) a:only-child {
+		-webkit-animation: fadeOut 0.6s forwards;
+		animation: fadeOut 0.6s forwards;
+	}
+
+	.zp-effect-scalerotate div:nth-child(-n+3) { z-index: 2; } /* order for correct overlapping */
+	.zp-effect-scalerotate div:nth-last-child(-n+3) { z-index: 1; }
+
+	/* Stack back 3D */
+	.zp-effect-stackback div {
+		-webkit-perspective: 1000px;
+		perspective: 1000px;
+	}
+
+	.zp-effect-stackback div a {
+		-webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.zp-effect-stackback.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: moveLeft 0.8s forwards;
+		animation: moveLeft 0.8s forwards;
+	}
+
+	.zp-effect-stackback.zp-effect-active div a:nth-child(2),
+	.zp-effect-stackback.zp-effect-active div.zp-empty a {
+		z-index: -1;
+		-webkit-animation: popUp 0.8s ease-in forwards;
+		animation: popUp 0.8s ease-in forwards;
+	}
+
+	.zp-effect-stackback.zp-effect-active div:not(.zp-empty) a:only-child {
+		-webkit-animation: fadeOut 0.8s forwards;
+		animation: fadeOut 0.8s forwards;
+	}
+
+	.zp-effect-stackback.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: fadeIn 0.8s forwards;
+		animation: fadeIn 0.8s forwards;
+	}
+
+	/* 3d flip */
+	.zp-effect-3dflip div {
+		-webkit-perspective: 1000px;
+		perspective: 1000px;
+	}
+
+	.zp-effect-3dflip div a {
+		-webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.zp-effect-3dflip.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-transform-origin: 0% 50%;
+		transform-origin: 0% 50%;
+		-webkit-animation: rotateOutLeft 0.6s forwards;
+		animation: rotateOutLeft 0.6s forwards;
+	}
+
+	.zp-effect-3dflip.zp-effect-active div a:nth-child(2),
+	.zp-effect-3dflip.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-transform-origin: 100% 50%;
+		transform-origin: 100% 50%;
+		-webkit-animation: rotateInRight 0.6s ease-in forwards;
+		animation: rotateInRight 0.6s ease-in forwards;
+	}
+
+	/* Bring back */
+	/* From https://github.com/hakimel/kontext by Hakim El Hattab, http://hakim.se */
+	.zp-effect-bringback div {
+		-webkit-perspective: 1000px;
+		perspective: 1000px;
+	}
+
+	.zp-effect-bringback div a {
+		-webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.zp-effect-bringback.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: hideLeft 0.8s forwards;
+		animation: hideLeft 0.8s forwards;
+	}
+
+	.zp-effect-bringback.zp-effect-active div a:nth-child(2) {
+		z-index: -1;
+		-webkit-animation: showRight 0.8s forwards;
+		animation: showRight 0.8s forwards;
+	}
+
+	.zp-effect-bringback.zp-effect-active div:not(.zp-empty) a:only-child {
+		-webkit-animation: fadeOut 0.8s forwards;
+		animation: fadeOut 0.8s forwards;
+	}
+
+	.zp-effect-bringback.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: fadeIn 0.8s forwards;
+		animation: fadeIn 0.8s forwards;
+	}
+
+	/* Superscale */
+	.zp-effect-superscale.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: scaleDown 0.6s ease-in-out forwards;
+		animation: scaleDown 0.6s ease-in-out forwards;
+	}
+
+	.zp-effect-superscale.zp-effect-active div a:nth-child(2),
+	.zp-effect-superscale.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: scaleIn 0.6s ease-in-out forwards;
+		animation: scaleIn 0.6s ease-in-out forwards;
+	}
+
+	/* Center flip */
+	.zp-effect-flip div {
+		-webkit-perspective: 1500px;
+		perspective: 1500px;
+	}
+
+	.zp-effect-flip div a {
+		-webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.zp-effect-flip.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: flipOut 0.8s ease-in forwards;
+		animation: flipOut 0.8s ease-in forwards;
+	}
+
+	.zp-effect-flip.zp-effect-active div a:nth-child(2),
+	.zp-effect-flip.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: flipIn 0.8s ease-in forwards;
+		animation: flipIn 0.8s ease-in forwards;
+	}
+
+	/* Front row */
+	.zp-effect-frontrow div {
+		overflow: hidden;
+	}
+
+	.zp-effect-frontrow.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: moveToBack 0.8s forwards;
+		animation: moveToBack 0.8s forwards;
+	}
+
+	.zp-effect-frontrow.zp-effect-active div a:nth-child(2),
+	.zp-effect-frontrow.zp-effect-active div.zp-empty a {
+		-webkit-animation: moveToFront 0.8s forwards;
+		animation: moveToFront 0.8s forwards;
+	}
+
+	.zp-effect-frontrow.zp-effect-active div.zp-empty a {
+		opacity: 0;
+	}
+
+	.zp-effect-frontrow.zp-effect-active div:not(.zp-empty) a:only-child {
+		-webkit-animation: fadeOut 0.5s forwards;
+		animation: fadeOut 0.5s forwards;
+	}
+
+	/* Animation delays */
+	.zp-grid-wrapper .zp-effect-delay.zp-effect-active div:nth-child(2) a {
+		-webkit-animation-delay: 0.1s;
+		animation-delay: 0.1s;
+	}
+
+	.zp-grid-wrapper .zp-effect-delay.zp-effect-active div:nth-child(3) a {
+		-webkit-animation-delay: 0.2s;
+		animation-delay: 0.2s;
+	}
+
+	.zp-grid-wrapper .zp-effect-delay.zp-effect-active div:nth-child(4) a {
+		-webkit-animation-delay: 0.3s;
+		animation-delay: 0.3s;
+	}
+
+	.zp-grid-wrapper .zp-effect-delay.zp-effect-active div:nth-child(5) a {
+		-webkit-animation-delay: 0.4s;
+		animation-delay: 0.4s;
+	}
+
+	.zp-grid-wrapper .zp-effect-delay.zp-effect-active div:nth-child(6) a {
+		-webkit-animation-delay: 0.5s;
+		animation-delay: 0.5s;
+	}
+
+	/* Reverse delays */
+	.zp-grid-wrapper .zp-effect-delay-reversed.zp-effect-active div:nth-child(5) a {
+		-webkit-animation-delay: 0.1s;
+		animation-delay: 0.1s;
+	}
+
+	.zp-grid-wrapper .zp-effect-delay-reversed.zp-effect-active div:nth-child(4) a {
+		-webkit-animation-delay: 0.2s;
+		animation-delay: 0.2s;
+	}
+
+	.zp-grid-wrapper .zp-effect-delay-reversed.zp-effect-active div:nth-child(3) a {
+		-webkit-animation-delay: 0.3s;
+		animation-delay: 0.3s;
+	}
+
+	.zp-grid-wrapper .zp-effect-delay-reversed.zp-effect-active div:nth-child(2) a {
+		-webkit-animation-delay: 0.4s;
+		animation-delay: 0.4s;
+	}
+
+	.zp-grid-wrapper .zp-effect-delay-reversed.zp-effect-active div:nth-child(1) a {
+		-webkit-animation-delay: 0.5s;
+		animation-delay: 0.5s;
+	}

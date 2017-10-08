@@ -1,0 +1,63 @@
+/*------------------- TOGGLE ------------------------*/
+.toggle-unit {
+	margin-bottom: 20px
+}
+.toggle-wrap {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0);
+	border: 2px solid #515E6C;
+	border-radius: 3px;
+	float: left;
+	margin-bottom: 10px;
+	overflow: hidden;
+	width: 100%;
+}
+.toggle-wrap:last-child {
+}
+.trigger.active > a {
+}
+.trigger a {
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-o-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
+	color: inherit;
+	display: block;
+	font-weight: 400;
+	float:left;
+	padding: 10px 20px;
+	text-decoration: none;
+	width: 100%;
+}
+.toggle-container {
+	float: left;
+	font-style: italic;
+	overflow: hidden;
+	padding: 0 20px 20px;
+}
+.toogle_image {
+	display: none;
+	background-color: #646D72;
+	background-image: url("https://489323192bc07f331d47-c06041d322f1ad6b39306f4da82d1689.ssl.cf1.rackcdn.com/wp-content/themes/argo/include/shortcodes/shortcode_icons/plus.png");
+	background-position: 7px center;
+	background-repeat: no-repeat;
+	float: left;
+	height: 21px;
+	margin: 10px 13px;
+	position: absolute;
+	width: 21px;
+}
+.active .toogle_image {
+	display: none;
+	background-image: url(https://489323192bc07f331d47-c06041d322f1ad6b39306f4da82d1689.ssl.cf1.rackcdn.com/wp-content/themes/argo/include/shortcodes/shortcode_icons/minus.png);
+	background-repeat: no-repeat;
+	background-position: 7px center;
+	background-color: #646D72;
+	float: left;
+	height:21px;
+	margin: 10px 13px;
+	position: absolute;
+	width: 21px;
+}

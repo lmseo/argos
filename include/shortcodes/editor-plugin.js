@@ -122,7 +122,7 @@ var shortcodeButton=[
 			allowSelection:false,
 			fields:[{id:'columnone', name:'Column One Content', textarea:true}, {id:'columntwo', name:'Column Two Content', textarea:true}],
 			generateHtml:function(obj){
-				return '[col_wrapper]<br />[col2]'+obj.columnone+'[/col2]<br />[col2_last]'+obj.columntwo+'[/col2_last]<br />[/col_wrapper]';
+				return '[col_wrapper dataequalizer="false" dataequalizermq="medium-up"]<br />[col2]'+obj.columnone+'[/col2]<br />[col2_last]'+obj.columntwo+'[/col2_last]<br />[/col_wrapper]';
 			}
 		},
 		{
@@ -132,7 +132,7 @@ var shortcodeButton=[
 			allowSelection:false,
 			fields:[{id:'columnone', name:'Column One Content', textarea:true}, {id:'columntwo', name:'Column Two Content', textarea:true}, {id:'columnthree', name:'Column Three Content', textarea:true}],
 			generateHtml:function(obj){
-				return '[col_wrapper]<br />[col3]'+obj.columnone+'[/col3]<br />[col3]'+obj.columntwo+'[/col3]<br />[col3_last]'+obj.columnthree+'[/col3_last]<br />[/col_wrapper]';
+				return '[col_wrapper dataequalizer="false" dataequalizermq="medium-up"]<br />[col3]'+obj.columnone+'[/col3]<br />[col3]'+obj.columntwo+'[/col3]<br />[col3_last]'+obj.columnthree+'[/col3_last]<br />[/col_wrapper]';
 			}
 		},
 		{
@@ -142,7 +142,7 @@ var shortcodeButton=[
 			allowSelection:false,
 			fields:[{id:'columnone', name:'Column One Content', textarea:true}, {id:'columntwo', name:'Column Two Content', textarea:true}, {id:'columnthree', name:'Column Three Content', textarea:true}, {id:'columnfour', name:'Column Four Content', textarea:true}],
 			generateHtml:function(obj){
-				return '[col_wrapper]<br />[col4]'+obj.columnone+'[/col4]<br />[col4]'+obj.columntwo+'[/col4]<br />[col4]'+obj.columnthree+'[/col4]<br />[col4_last]'+obj.columnfour+'[/col4_last]<br />[/col_wrapper]';
+				return '[col_wrapper dataequalizer="false" dataequalizermq="medium-up"]<br />[col4]'+obj.columnone+'[/col4]<br />[col4]'+obj.columntwo+'[/col4]<br />[col4]'+obj.columnthree+'[/col4]<br />[col4_last]'+obj.columnfour+'[/col4_last]<br />[/col_wrapper]';
 			}
 		},
 		{
@@ -247,7 +247,7 @@ var shortcodeButton=[
 			}
 		},		
 		{
-			id:'button',
+			id:'button2',
 			image:'but.png',
 			title:'Button',
 			allowSelection:false,
@@ -262,7 +262,7 @@ var shortcodeButton=[
 			}
 		},
 		{
-			id:'slider',
+			id:'slide',
 			image:'slide.png',
 			title:'Image Slider',
 			allowSelection: false,

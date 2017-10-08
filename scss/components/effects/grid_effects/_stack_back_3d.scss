@@ -1,0 +1,37 @@
+/* Stack back 3D */
+	.zp-effect-stackback div {
+		-webkit-perspective: 1000px;
+		perspective: 1000px;
+	}
+
+	.zp-effect-stackback div a {
+		-webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.zp-effect-stackback.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: moveLeft 0.8s forwards;
+		animation: moveLeft 0.8s forwards;
+	}
+
+	.zp-effect-stackback.zp-effect-active div a:nth-child(2),
+	.zp-effect-stackback.zp-effect-active div.zp-empty a {
+		z-index: -1;
+		-webkit-animation: popUp 0.8s ease-in forwards;
+		animation: popUp 0.8s ease-in forwards;
+	}
+
+	.zp-effect-stackback.zp-effect-active div:not(.zp-empty) a:only-child {
+		-webkit-animation: fadeOut 0.8s forwards;
+		animation: fadeOut 0.8s forwards;
+	}
+
+	.zp-effect-stackback.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: fadeIn 0.8s forwards;
+		animation: fadeIn 0.8s forwards;
+	}

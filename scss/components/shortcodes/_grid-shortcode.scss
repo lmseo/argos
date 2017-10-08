@@ -1,0 +1,32 @@
+/*----------------------width option --------------------------*/
+div.full-width {
+	width: 100%;
+	margin-bottom: 20px;
+}
+div.one-half {
+	width: 47.92%
+}
+div.one-third {
+	width: 31.44%
+}
+div.two-third {
+	width: 62.92%
+}
+div.one-fourth {
+	width: 22.92%
+}
+div.three-fourth {
+	width: 73.78%
+}
+div.one-half.special-services-box, div.one-third.special-services-box, div.two-third.special-services-box, div.three-fourth.special-services-box, div.one-fourth.special-services-box, div.one-half.team, div.one-third.team, div.two-third.team, div.three-fourth.team, div.one-fourth.team {
+	position: relative;
+	margin: 0 1.1% 20px;
+	float: left;
+}
+div.last-column {
+	margin-right: 0 !important;
+}
+.column-excerpt {
+	float: right;
+	width: 74%;
+}

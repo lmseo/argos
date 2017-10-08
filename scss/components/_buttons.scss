@@ -1,0 +1,109 @@
+/*--------------------------------------------------------------------------------------------------
+    BUTTONS
+--------------------------------------------------------------------------------------------------*/
+.cta_button.button.small-btn,
+.cta_button.button.medium-button,
+.cta_button.button.large-btn {
+}
+//sizes
+.small-btn {
+	font-size: 10px !important;
+	font-size: 1rem !important;
+	text-transform: uppercase;
+}
+.medium-button {
+	font-size: 1.6rem!important;
+	font-size: 16px!important;
+}
+.large-btn {
+	font-size: 2.4rem!important;
+	font-size: 24px !important;
+}
+
+.rounded {
+	-webkit-border-radius: 35px !important;
+	-moz-border-radius: 35px !important;
+	-ms-border-radius: 35px !important;
+	-o-border-radius: 35px !important;
+	border-radius: 35px !important;
+}
+.button-wrapper{
+	margin:2rem 0;
+}
+///white buttons
+.button.white {
+	background-color: #fff !important;
+	color: #333 !important;
+}
+a.button.white:hover, a.button.white:focus {
+	background-color: #333 !important;
+	color: #fff !important;
+	border-color: #333 !important;
+}
+
+//Blue Buttons
+.button.blue {
+	background-color: #008CBA !important;
+	border-color: #008CBA !important;
+	color: #fff !important;
+}
+a.button.blue:hover, a.button.blue:focus {
+	color: #014156 !important;
+}
+
+//Red Buttons
+.button.red {
+	background-color: #FF4343 !important;
+	border-color: #FF4343 !important;
+}
+a.button.red:hover, a.button.red:focus {
+	color: #fff !important;
+}
+
+//Green Button
+.button.green {
+	background: #4ED6B3 !important;
+	border-color: #4ED6B3 !important;
+}
+a.button.green:hover, a.button.green:focus {
+	color: #fff !important;
+}
+
+//Orange Buttons
+.button.orange {
+	background-color: $senary-color !important;
+	border-color: $senary-color !important;
+	color: #fff !important;
+}
+a.button.orange:hover, a.button.orange:focus {
+	color: scale-color($senary-color, $lightness: 85%) !important;
+	background-color: scale-color($senary-color, $lightness: -15%) !important;
+}
+/*#Black Buttons*/
+.button.black {
+	background-color: #333 !important;
+	border-color: #333 !important;
+}
+a.button.black:hover, a.button.black:focus {
+	color: #fff !important;
+}
+a.button.black:active {
+	top: 1px!important;
+	-moz-box-shadow: none!important;
+	-webkit-box-shadow: none!important;
+	-o-box-shadow: none!important;
+	box-shadow: none!important;
+}
+
+//Maroon Buttons
+$button-maroon: #601600;
+.button.maroon {
+	background-color: $quinary-color !important;
+	border-color: $quinary-color !important;
+	color: #fff !important;
+}
+a.button.maroon:hover, a.button.orange:focus {
+	color: scale-color($quinary-color, $lightness: 85%) !important;
+	background-color: scale-color($quinary-color, $lightness: 15%) !important;
+	border-color: scale-color($quinary-color, $lightness: 15%) !important;
+}

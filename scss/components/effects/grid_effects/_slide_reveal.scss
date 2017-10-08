@@ -1,0 +1,22 @@
+	/* Slide and reveal */
+	.zp-effect-slide.zp-effect-active div:not(.zp-empty) a:first-child {
+		z-index: 100;
+		overflow: hidden;
+		margin: 0;
+		-webkit-animation: slideOut 0.5s forwards;
+		animation: slideOut 0.5s forwards;
+	}
+
+	.zp-effect-slide.zp-effect-active a:nth-child(2) {
+		visibility: visible;
+	}
+
+	.zp-effect-slide.zp-effect-active div:not(.zp-empty) a:only-child {
+		-webkit-animation: fadeOut 0.5s forwards;
+		animation: fadeOut 0.5s forwards;
+	}
+
+	.zp-effect-slide.zp-effect-active div.zp-empty a {
+		-webkit-animation: fadeIn 0.5s forwards;
+		animation: fadeIn 0.5s forwards;
+	}

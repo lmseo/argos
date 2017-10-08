@@ -1,0 +1,102 @@
+/* Tabs, Testimonials, Accordion
+-----------------------------------------------------*/
+.tabs-container {
+	margin-bottom: 20px;
+}
+ul.tabs {
+	display: block;
+	margin: 4px 0 0;
+	padding: 0;
+	list-style: none;
+}
+ul.tabs li {
+	display: block;
+	width: auto;
+	height: 40px;
+	padding: 0;
+	float: left;
+	margin: 0 4px 0 0;
+}
+ul.tabs li a {
+	border: 2px solid #515E6C;
+	color: inherit;
+	height: 42px;
+	line-height: 30px;
+	margin: 0;
+	padding: 5px 20px;
+	width: auto;
+}
+ul.tabs li a.current {
+	background: rgba(0, 0, 0, 0);
+	border-bottom: 2px solid #F7F7FA;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+}
+ul.tabs li a.active {
+	height: 30px;
+	position: relative;
+	top: -4px;
+	padding-top: 4px;
+	border-left-width: 1px;
+	margin: 0 0 0 -1px;
+	-moz-border-radius-topleft: 2px;
+	-webkit-border-top-left-radius: 2px;
+	border-top-left-radius: 2px;
+	-moz-border-radius-topright: 2px;
+	-webkit-border-top-right-radius: 2px;
+	border-top-right-radius: 2px;
+}
+ul.tabs li:first-child a.active {
+	margin-left: 0;
+}
+ul.tabs li:first-child a {
+	border-width: 2px;
+	-moz-border-radius-topleft: 2px;
+	-webkit-border-top-left-radius: 2px;
+	border-top-left-radius: 2px;
+}
+ul.tabs li:last-child a {
+	-moz-border-radius-topright: 2px;
+	-webkit-border-top-right-radius: 2px;
+	border-top-right-radius: 2px;
+}
+ul.tabs-content {
+	margin: 0 0 0px;
+	display: block;
+	list-style: none;
+}
+ul.tabs-content > li {
+	display:none;
+}
+ul.tabs-content > li.active {
+	display: block;
+}
+/* Clearfixing tabs for beautiful stacking */
+
+ul.tabs:before, ul.tabs:after {
+	content: '\0020';
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+ul.tabs:after {
+	clear: both;
+}
+
+ul.tabs li.w3 a {
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-o-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
+	display: block;
+	text-decoration: none;
+}
+.panes {
+	background: rgba(0, 0, 0, 0);
+	border: 2px solid #515E6C;
+	font-style: italic;
+	padding: 20px;
+}

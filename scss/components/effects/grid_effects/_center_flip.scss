@@ -1,0 +1,26 @@
+/* Center flip */
+	.zp-effect-flip div {
+		-webkit-perspective: 1500px;
+		perspective: 1500px;
+	}
+
+	.zp-effect-flip div a {
+		-webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.zp-effect-flip.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: flipOut 0.8s ease-in forwards;
+		animation: flipOut 0.8s ease-in forwards;
+	}
+
+	.zp-effect-flip.zp-effect-active div a:nth-child(2),
+	.zp-effect-flip.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: flipIn 0.8s ease-in forwards;
+		animation: flipIn 0.8s ease-in forwards;
+	}

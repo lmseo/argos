@@ -1,0 +1,73 @@
+/*-------------------------TEAM---------------------------*/
+
+.team {
+	float: left;
+	text-align: center;
+	margin-bottom: 20px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+	overflow: hidden;
+}
+.team .box-wrapper {
+	padding: 0;
+}
+.team .box-wrapper p {
+	font-size: 16px;
+	font-size: 1.6rem;
+	font-style: italic;
+	padding: 0 10px;
+}
+.team .box-wrapper:hover {
+	cursor: default;
+}
+.team_socials {
+	float: left;
+	margin: 25px auto 20px !important;
+	padding: 0 !important;
+	width: 100%;
+}
+.team_socials a {
+	display: inline-block;
+	background-color: transparent;
+	border: 2px solid #515E6C;
+	color: #515E6C;
+	font-family: "socialicoregular";
+	font-size: 24px;
+	font-style: normal;
+	height: 40px;
+	line-height: 40px;
+	margin: 0 5px;
+	opacity: 1;
+	overflow: hidden;
+	text-align: center;
+	text-shadow:none;
+	transition: all 0.2s linear 0s;
+	width: 40px;
+}
+.team_socials a:hover {
+	background-color: transparent;
+	color: #515E6C;
+	text-decoration: none;
+}
+.team .box-wrapper h4 {
+	background: transparent;
+	border: medium none;
+	margin: 10px 0;
+	padding: 0;
+	text-align: center;
+}
+.team .box-wrapper h5 {
+	font-size: 12px;
+	font-size: 1.2rem;
+	font-weight: 400;
+	letter-spacing: 2px;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+}
+.team_image_block {
+	display: block;
+	overflow: hidden;
+	position: relative;
+	margin: 0 0 20px;
+}

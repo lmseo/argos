@@ -1,0 +1,23 @@
+/* Effect 4: Newspaper */
+	.md-effect-4 .md-content {
+		-webkit-transform: scale(0) rotate(720deg);
+		-moz-transform: scale(0) rotate(720deg);
+		-ms-transform: scale(0) rotate(720deg);
+		transform: scale(0) rotate(720deg);
+		opacity: 0;
+	}
+
+	.md-show.md-effect-4 ~ .md-overlay,
+	.md-effect-4 .md-content {
+		-webkit-transition: all 0.5s;
+		-moz-transition: all 0.5s;
+		transition: all 0.5s;
+	}
+
+	.md-show.md-effect-4 .md-content {
+		-webkit-transform: scale(1) rotate(0deg);
+		-moz-transform: scale(1) rotate(0deg);
+		-ms-transform: scale(1) rotate(0deg);
+		transform: scale(1) rotate(0deg);
+		opacity: 1;
+	}

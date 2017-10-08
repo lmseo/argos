@@ -1,7 +1,7 @@
 var gulp		= require('gulp');
-var watch = require('gulp-watch');
+//var watch 		= require('gulp-watch');
 var size 		= require('gulp-size');
-var cache 		= require('gulp-cache');
+//var cache 		= require('gulp-cache');
 var concat		= require('gulp-concat');
 var rename		= require('gulp-rename');
 var uglify		= require('gulp-uglify');
@@ -15,10 +15,10 @@ var autoprefixer = require('gulp-autoprefixer');
 var imagemin   	= require('gulp-imagemin');
 var svgmin 		= require('gulp-svgmin');
 var critical 	= require('critical');
-var penthouse = require('penthouse'),
-    path = require('path');
-var uncss = require('gulp-uncss');
-var fs = require('fs');
+var penthouse 	= require('penthouse'),
+    path 		= require('path');
+var uncss 		= require('gulp-uncss');
+var fs 			= require('fs');
 var browserSync = require('browser-sync').create();
 
 /*
@@ -26,11 +26,6 @@ var browserSync = require('browser-sync').create();
 */
 gulp.task('default', function(callback){
 	runSequence('intdevjs', 'intdistjs','inddevjs', 'inddistjs','portdevjs', 'portdistjs', callback);
-});
-
-//Watch
-gulp.task('watch', function () {
-  gulp.watch('scss/**/*.scss', ['sassruby']);
 });
 
 //index
@@ -42,7 +37,7 @@ gulp.task('indexjs', function(callback){
 });
 //internal
 gulp.task('intstyle', function(callback){
-	runSequence('intsassruby', callback);
+	runSequence('sassruby', callback);
 });
 gulp.task('intjs', function(callback){
 	runSequence('intdevjs', 'intdistjs', callback);
@@ -50,26 +45,32 @@ gulp.task('intjs', function(callback){
 
 //portfolio archive
 gulp.task('portarchstyle', function(callback){
-	runSequence('portarchsassruby', 'portarchuncss','portarchuncssmiss','portarchcritical', callback);
+	runSequence('portarchuncss','portarchuncssmiss','portarchcritical', callback);
 });
 gulp.task('portjs', function(callback){
 	runSequence('portarchdevjs', 'portarchdistjs', callback);
 });
 //portfolio single
 gulp.task('portstyle', function(callback){
-	runSequence('portsassruby', 'portuncss','portuncssmiss','portcritical', callback);
+	runSequence('portuncssmisssass','portuncss','portuncssmiss','portcritical', callback);
 });
 gulp.task('portjs', function(callback){
 	runSequence('portdevjs', 'portdistjs', callback);
 });
 //Slider Template
 gulp.task('slidertempstyle', function(callback){
-	runSequence('slidertempsassruby', 'slidertempuncss','slidertempuncssmiss','slidertempcritical', callback);
+	runSequence('slidertempuncss','slidertempuncssmiss','slidertempcritical', callback);
 });
 gulp.task('slidertempjs', function(callback){
 	runSequence('slidertempdevjs', 'slidertempdistjs', callback);
 });
-
+//services Template
+gulp.task('servicestempstyle', function(callback){
+	runSequence('servicestempuncss','servicestempuncssmiss','servicestempcritical', callback);
+});
+gulp.task('servicestempjs', function(callback){
+	runSequence('servicestempdevjs', 'servicestempdistjs', callback);
+});
 
 /** Image Optimization*/
 gulp.task('images', function(){
@@ -102,12 +103,6 @@ gulp.task('svgimages', function () {
 });
 gulp.task('clear', function (done) {
 	return cache.clearAll(done);
-});
-
-gulp.task('browser-sync', function() {
-    browserSync.init({
-        proxy: "http://arch"
-    });
 });
 
 /**Index Page Build*/
@@ -149,23 +144,35 @@ gulp.task('inddistjs',function(){
 	.pipe(sourcemaps.write('/'))
 	.pipe(gulp.dest('bin/js/index/'));
 });
-gulp.task('sassruby', function () {
+
+//Browsersyn
+gulp.task('serve', ['sass'], function() {
+
+    browserSync.init({
+        proxy: "http://arch/"
+    });
+
+    gulp.watch("app/scss/*.scss", ['sass']);
+    gulp.watch("app/*.html").on('change', browserSync.reload);
+});
+//Sass
+gulp.task('sass', function () {
     return sass(
-    	'scss/',{
+    	'scss/**/*.scss',{
 	    	sourcemap: true,
 	    	style: 'expanded',
 	    	loadPath:['scss/','bower_components/foundation/scss','bower_components/fontawesome/scss']
     })
 	.pipe(autoprefixer('last 2 versions'))
     .pipe(sourcemaps.init())
-    .pipe(size())
+    //.pipe(size())
     .pipe(nano())
     .on('error', function (err) {
       console.error('Error', err.message);     
     })
-    .pipe(size())
-	.pipe(sourcemaps.write('bin/maps/css/index/'))
-	.pipe(size())
+   // .pipe(size())
+	.pipe(sourcemaps.write('bin/maps/'))
+	//.pipe(size())
     .pipe(gulp.dest('./'))
     .pipe(size())
     .pipe(browserSync.reload({stream: true}));
@@ -196,9 +203,18 @@ gulp.task('criticalindex', function () {
         base: './',
         src: 'http://arch/',
         dest: 'bin/css/index/critical/styles.min.css.php',
-        css: 'bin/css/index/uncss/style.css',
-        width: 320,
-        height: 480,
+        css: 'bin/css/index/uncss/complete/style.css',
+        dimensions: [{
+			width: 320,
+			height: 480
+			},{
+			width: 768,
+			height: 1024
+			},{
+			width: 1280,
+			height: 960
+		}],
+		ignore: ['@font-face'],
         minify: true
     });
 });
@@ -369,6 +385,7 @@ gulp.task('portarchcritical', function () {
 					width: 1280,
 					height: 960
 		}],
+		ignore: ['@font-face'],
         minify: true
     });
 });
@@ -429,26 +446,52 @@ gulp.task('portdistjs',function(){
 	.pipe(sourcemaps.write('/'))
 	.pipe(gulp.dest('bin/js/internal/portfolio/'));
 });
-gulp.task('portsassruby', function () {
+gulp.task('portsass', function () {
     return sass(
-    	'scss/',{
+    	['scss/bin/css/internal/portfolio/style.scss'],{
 	    	sourcemap: true,
 	    	style: 'expanded',
-	    	loadPath:['scss/','bower_components/foundation/scss','bower_components/fontawesome/scss','bower_components/galereya/dist/scss']
+	    	loadPath:['scss/','bower_components/foundation/scss','bower_components/fontawesome/scss']
     })
 	.pipe(autoprefixer('last 2 versions'))
-    //.pipe(sourcemaps.init())
+    .pipe(sourcemaps.init())
+    //.pipe(size())
     .pipe(nano())
     .on('error', function (err) {
       console.error('Error', err.message);     
     })
-	//.pipe(sourcemaps.write('bin/maps/css/internal/portfolio/'))
-    .pipe(gulp.dest('./'));
+   // .pipe(size())
+	.pipe(sourcemaps.write('/'))
+	//.pipe(size())
+    .pipe(gulp.dest('./bin/css/internal/portfolio/'))
+    .pipe(size())
+    .pipe(browserSync.reload({stream: true}));
+});
+gulp.task('portuncssmisssass', function () {
+    return sass(
+    	['scss/bin/css/internal/portfolio/uncss/missing/*.scss'],{
+	    	sourcemap: true,
+	    	style: 'expanded',
+	    	loadPath:['scss/','bower_components/foundation/scss','bower_components/fontawesome/scss']
+    })
+	.pipe(autoprefixer('last 2 versions'))
+    .pipe(sourcemaps.init())
+    //.pipe(size())
+    .pipe(nano())
+    .on('error', function (err) {
+      console.error('Error', err.message);     
+    })
+   // .pipe(size())
+	.pipe(sourcemaps.write('/'))
+	//.pipe(size())
+    .pipe(gulp.dest('./bin/css/internal/portfolio/uncss/missing/'))
+    .pipe(size())
+    .pipe(browserSync.reload({stream: true}));
 });
 gulp.task('portuncss', function () {
     return gulp.src('bin/css/internal/portfolio/style.css')
         .pipe(uncss({
-            html: ['http://arch/portfolio/bathrooms/']
+            html: ['http://arch/portfolio/bathrooms/','http://arch/portfolio/commercial/','http://arch/portfolio/kitchens/','http://arch/portfolio/other/','http://arch/portfolio/windows/']
         }))
         .pipe(rename('style.css'))
         .pipe(gulp.dest('bin/css/internal/portfolio/uncss/'));
@@ -470,8 +513,17 @@ gulp.task('portcritical', function () {
         src: 'http://arch/portfolio/bathrooms/',
         dest: 'bin/css/internal/portfolio/critical/styles.min.css.php',
         css: 'bin/css/internal/portfolio/uncss/complete/style.css',
-        width: 320,
-        height: 480,
+        dimensions: [{
+			width: 320,
+			height: 480
+			},{
+			width: 768,
+			height: 1024
+			},{
+			width: 1280,
+			height: 960
+		}],
+		ignore: ['@font-face'],
         minify: true
     });
 });
@@ -560,9 +612,9 @@ gulp.task('slidertempuncssmiss',function(){
 gulp.task('slidertempcritical', function () {
     critical.generate({
         base: './',
-        src: 'index.html',
+        src: 'http://arch/portfolio/bathrooms/',
         dest: 'bin/css/internal/slider/template/critical/styles.min.css.php',
-        css: 'bin/css/internal/slider/template/uncss/style.css',
+        css: 'bin/css/internal/slider/template/uncss/complete/style.css',
 		dimensions: [{
 			width: 320,
 			height: 480
@@ -573,6 +625,96 @@ gulp.task('slidertempcritical', function () {
 			width: 1280,
 			height: 960
 		}],
+		ignore: ['@font-face'],
+        minify: true
+    });
+});
+/*
+*Services Template
+*/
+gulp.task('servicestempdevjs',function(){
+	return gulp.src([
+		'bower_components/jquery/dist/jquery.js',
+		'bower_components/jquery-migrate/jquery-migrate.min.js',
+		'js/modernizr.custom.js',
+		'bower_components/jquery.easing/jquery.easing.min.js',
+		'bower_components/prettyphoto/js/jquery.prettyPhoto.js',
+		'bower_components/jquery.scrollTo/jquery.scrollTo.min.js',
+		'bower_components/TipTip/jquery.tipTip.minified.js',
+		'js/jquery.tools.js',
+		'js/waypoints.js',
+		'js/sidebar.js',
+		//'js/jquery.custom.js',
+		'js/custom/toplink.js',
+		'js/custom/setssidebarheight.js',
+		'bower_components/angular/angular.min.js',
+    	'bower_components/angular-sanitize/angular-sanitize.min.js',
+    	'include/widgets/search/js/app.js',
+    	'include/widgets/search/js/controllers.js',
+    	'include/widgets/search/js/services.js',
+    	'bower_components/foundation/js/foundation.js',
+    	'bower_components/foundation/js/foundation/foundation.equalizer.js',
+    	'js/foundation/app.js'
+	])
+	.pipe(sourcemaps.init())
+	.pipe(concat('main.js'))
+	.pipe(sourcemaps.write('/'))
+	.pipe(size())
+	.pipe(gulp.dest('js/dev/internal/services/template/'));
+});
+gulp.task('servicestempdistjs',function(){
+	return gulp.src([
+		'js/dev/internal/services/template/main.js',
+	])
+	.pipe(sourcemaps.init({loadMaps: true}))
+	.pipe(rename('main.min.js'))
+	.pipe(size())
+	.pipe(uglify())
+	.on('error', function (err) {
+      console.error('Error', err.message);     
+    })
+	.pipe(size())
+	.pipe(sourcemaps.write('/'))
+	.pipe(gulp.dest('bin/js/internal/services/template/'));
+});
+gulp.task('servicestempuncss', function () {
+    return gulp.src('bin/css/internal/services/style.css')
+        .pipe(uncss({
+            html: ['http://arch/services/',
+            'http://arch/services/residential/'
+            	]
+        }))
+        .pipe(rename('style.css'))
+        .pipe(gulp.dest('bin/css/internal/services/uncss/'));
+});
+gulp.task('servicestempuncssmiss',function(){
+	return gulp.src([
+		'bin/css/internal/services/uncss/style.css',
+		'bin/css/internal/services/uncss/missing/*.css',
+	])
+	.pipe(sourcemaps.init({loadMaps: true}))
+	.pipe(concat('style.css'))
+	.pipe(nano())
+	.pipe(sourcemaps.write('/'))
+	.pipe(gulp.dest('bin/css/internal/services/uncss/complete/'));
+});
+gulp.task('servicestempcritical', function () {
+    critical.generate({
+        base: './',
+        src: 'http://arch/services/residential/',
+        dest: 'bin/css/internal/services/critical/styles.min.css.php',
+        css: 'bin/css/internal/services/uncss/complete/style.css',
+		dimensions: [{
+			width: 320,
+			height: 480
+			},{
+			width: 768,
+			height: 1024
+			},{
+			width: 1280,
+			height: 960
+		}],
+		ignore: ['@font-face'],
         minify: true
     });
 });

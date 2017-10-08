@@ -1,0 +1,42 @@
+.banner_container{
+	width: 100%;
+	height: 350px;
+	position: relative;
+	//border-left: 15px solid #fff;
+    //border-right: 15px solid #fff;
+    //border-top: 15px solid #fff;
+}
+.banner_dirty-bottom{
+	background-image: url(/wp-content/themes/argo/images/dirty-bottom.png);
+	position:absolute;
+	bottom: 0;
+	height: 47px;
+	width: 100%;
+}
+.banner_tittle_wrapper{
+	padding: 140px 0 0;
+}
+.banner_title {
+	border: 0;
+    background-color: $senary-color;
+    color: #fff;
+    display: table;
+    font-family: Nunito,sans-serif,Helvetica,Arial,sans-serif;
+    font-style: normal;
+    font-size: 2.7rem;
+    font-weight: normal;
+    letter-spacing: -.007em;
+    line-height: 175%;
+    vertical-align: center;
+    padding: 0 20px;
+    margin-bottom: 5px;
+    text-align: left;
+    text-transform: none;
+}
+.banner_dirty-top {
+    background: url(/wp-content/themes/argo/images/dirty-top.png) repeat-x top center;
+    top: 0;
+    height: 61px;
+    position: absolute;
+    width: 100%;
+}

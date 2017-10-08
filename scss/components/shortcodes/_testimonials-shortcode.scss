@@ -1,0 +1,46 @@
+/*--------------------------------------------------------------------------------------------------
+    Testimonial
+--------------------------------------------------------------------------------------------------*/
+.testimonial {
+	display: block;
+	position: relative;
+	min-height: 210px;
+}
+.testimonial_container {
+	position: relative;
+}
+.testimonial_content {
+	border-left: 4px solid;
+	display: block;
+	float: left;
+	overflow: hidden;
+	width: 100%;
+}
+.testimonial_content p {
+	font-size: 16px;
+	font-style: italic;
+	margin: 0;
+	padding: 25px;
+	text-shadow: none;
+}
+.testimonial .signature {
+	display: block;
+	float: right;
+	overflow: hidden;
+	line-height: 30px;
+	margin: 0;
+	padding:15px 0 0;
+	text-align: right;
+}
+.testimonial .signature .zp-icon{
+	font-size: 40px;
+	height: 30px;
+	width: 31px;
+	float: right;
+	line-height: 25px;
+	margin: 0 0 0 15px;
+}
+.testi_name {
+	font-weight: 700;
+	float: left;
+}

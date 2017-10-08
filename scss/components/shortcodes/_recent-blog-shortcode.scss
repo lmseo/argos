@@ -1,0 +1,31 @@
+/*--------------------------------------------------------------------------------------------------
+    Recent Blog Shortcode 
+--------------------------------------------------------------------------------------------------*/
+.blog_feature_shortcode {
+	width: 100%;
+	overflow: hidden;
+}
+.blog_feature_shortcode li {
+	-moz-box-sizing: border-box;
+	background: transparent;
+	float: left;
+	height: auto;
+	list-style: none !important;
+	padding: 0 !important;
+}
+.blog_feature_shortcode li h3 {
+	line-height: 16px;
+	margin: 20px 0 10px;
+}
+.blog_feature_shortcode li h3 a {
+	color: #2D3438;
+}
+.blog_feature_shortcode .element-2col {
+	width: 47.3%;
+}
+.blog_feature_shortcode .element-3col {
+	width: 30.8%
+}
+.blog_feature_shortcode .element-4col {
+	width: 22.6%;
+}

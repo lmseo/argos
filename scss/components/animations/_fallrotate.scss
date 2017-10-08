@@ -1,0 +1,13 @@
+@-webkit-keyframes fallRotate { 
+	0% { -webkit-transform: translateY(0%) rotate(0deg); -webkit-animation-timing-function: ease-in; -webkit-transform-origin: 0 0;}
+	40% { -webkit-transform: translateY(0%) rotate(20deg); -webkit-animation-timing-function: ease-out;-webkit-transform-origin: 0 0;}
+	60% { -webkit-transform: translateY(0%) rotate(15deg); opacity: 1;-webkit-transform-origin: 0 0;}
+	100% { -webkit-transform: translateY(150%) rotate(17deg); opacity: 0; -webkit-transform-origin: 0 0;}
+}
+
+@keyframes fallRotate { 
+	0% { transform: translateY(0%) rotate(0deg); animation-timing-function: ease-in; transform-origin: 0 0;}
+	40% { transform: translateY(0%) rotate(20deg); animation-timing-function: ease-out;transform-origin: 0 0;}
+	60% { transform: translateY(0%) rotate(15deg); opacity: 1;transform-origin: 0 0;}
+	100% { transform: translateY(150%) rotate(17deg); opacity: 0; transform-origin: 0 0;}
+}

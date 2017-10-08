@@ -18,8 +18,8 @@ function zp_portfolio_filter_template() {
 	global $post;
 			
 	$items = genesis_get_option( 'zp_num_portfolio_items' , ZP_SETTINGS_FIELD );
-
-	zp_portfolio_template( $items, 'portfolio');
+	//echo 'portfolio archive';
+	lmseo_portfolio_template( $items, 'portfolio');
 }
 
 genesis();

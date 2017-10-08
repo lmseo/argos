@@ -1,0 +1,24 @@
+	/* Fall and rotate */
+	.zp-effect-fallrotate.zp-effect-active div:not(.zp-empty) a:first-child {
+		z-index: 10;
+		-webkit-animation: fallRotate 0.6s ease-in forwards;
+		animation: fallRotate 0.6s ease-in forwards;
+	}
+
+	.zp-effect-fallrotate.zp-effect-active div a:nth-child(2),
+	.zp-effect-fallrotate.zp-effect-active div.zp-empty a {
+		visibility: visible;
+	}
+
+	.zp-effect-fallrotate.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: fadeIn 0.6s forwards;
+		animation: fadeIn 0.6s forwards;
+	}
+
+	.zp-effect-fallrotate div:nth-child(4) { z-index: 1; } /* order for correct overlapping */
+	.zp-effect-fallrotate div:nth-child(5) { z-index: 2; }
+	.zp-effect-fallrotate div:nth-child(6) { z-index: 3; }
+	.zp-effect-fallrotate div:first-child { z-index: 4; }
+	.zp-effect-fallrotate div:nth-child(2) { z-index: 5; }
+	.zp-effect-fallrotate div:nth-child(3) { z-index: 6; }

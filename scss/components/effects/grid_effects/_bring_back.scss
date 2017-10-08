@@ -1,0 +1,37 @@
+/* Bring back */
+	/* From https://github.com/hakimel/kontext by Hakim El Hattab, http://hakim.se */
+	.zp-effect-bringback div {
+		-webkit-perspective: 1000px;
+		perspective: 1000px;
+	}
+
+	.zp-effect-bringback div a {
+		-webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.zp-effect-bringback.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: hideLeft 0.8s forwards;
+		animation: hideLeft 0.8s forwards;
+	}
+
+	.zp-effect-bringback.zp-effect-active div a:nth-child(2) {
+		z-index: -1;
+		-webkit-animation: showRight 0.8s forwards;
+		animation: showRight 0.8s forwards;
+	}
+
+	.zp-effect-bringback.zp-effect-active div:not(.zp-empty) a:only-child {
+		-webkit-animation: fadeOut 0.8s forwards;
+		animation: fadeOut 0.8s forwards;
+	}
+
+	.zp-effect-bringback.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: fadeIn 0.8s forwards;
+		animation: fadeIn 0.8s forwards;
+	}

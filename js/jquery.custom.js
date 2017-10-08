@@ -1,5 +1,4 @@
-
-
+jQuery.noConflict();
 jQuery(document).ready(function($) {
 
 /*-------------------------------------------------------------*/
@@ -56,12 +55,13 @@ jQuery(document).ready(function($) {
 /*-------------------------------------------------------------*/
 //				PrettyPhoto 
 /*------------------------------------------------------------*/
-
+	if(typeof prettyPhoto!== "undefined" && jQuery.isFunction(prettyPhoto)){
 			jQuery("a[rel^='prettyPhoto']").prettyPhoto({
-						theme: 'light_rounded',
-						counter_separator_label: ' of ',
-						social_tools: '<div class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div><div class="facebook"><iframe src="//www.facebook.com/plugins/like.php?locale=en_US&href={location_href}&layout=button_count&show_faces=true&width=500&action=like&font&colorscheme=light&height=23" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:500px; height:23px;" allowTransparency="true"></iframe></div><div class="google_plus"><div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div><script type="text/javascript">(function(){ var po = document.createElement("script"); po.type = "text/javascript"; po.async = true; po.src = "https://apis.google.com/js/plusone.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s); })();</script></div></div>' 
-					});
+				theme: 'light_rounded',
+				counter_separator_label: ' of ',
+				social_tools: '<div class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div><div class="facebook"><iframe src="//www.facebook.com/plugins/like.php?locale=en_US&href={location_href}&layout=button_count&show_faces=true&width=500&action=like&font&colorscheme=light&height=23" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:500px; height:23px;" allowTransparency="true"></iframe></div><div class="google_plus"><div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div><script type="text/javascript">(function(){ var po = document.createElement("script"); po.type = "text/javascript"; po.async = true; po.src = "https://apis.google.com/js/plusone.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s); })();</script></div></div>' 
+			});
+	}
 					
 
 /*-------------------------------------------------------------*/
@@ -88,7 +88,9 @@ jQuery(document).ready(function($) {
 /*------------------------------------------------------------*/
 					
 					jQuery( function( ) {
-						jQuery( "ul.tabs" ).tabs( "div.panes > div" );
+						if (typeof tabs !== 'undefined' && jQuery.isFunction(tabs)) {
+							jQuery( "ul.tabs" ).tabs( "div.panes > div" );
+						}
 					} );					
 					
 
@@ -258,11 +260,8 @@ jQuery(document).ready(function($) {
 		addClassToNextChild();
 	}, {
 		offset:'100%'
-	});	
-
-
-
-	
+	});
+	jQuery("html").addClass("js-columns-ready");
 });
 
 /*-------------------------------------------------------------*/

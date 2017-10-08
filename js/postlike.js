@@ -54,10 +54,6 @@ jQuery(document).ready(function($){
             });
 
             createCookie('Liked' + ID,ID,365);
-            
-
-
-
         }
     }
     jQuery('.icon-heart').click(function(){
@@ -65,9 +61,5 @@ jQuery(document).ready(function($){
 		var id=classname.split(" ");
 	
 		insert_like(id[1]);
-    });
-	
-	
-
-	
+    });	
 });

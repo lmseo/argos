@@ -21,13 +21,14 @@ function zp_flickr_widgets() {
  * Widget class.
  */
 class zp_flickr_widget extends WP_Widget {
+	private $flickr_script;
 
 	/* ---------------------------- */
 	/* -------- Widget setup -------- */
 	/* ---------------------------- */
 	
 	function ZP_FLICKR_Widget() {
-	
+		$this->flickr_script = '';
 		/* Widget settings. */
 		$widget_ops = array( 'classname' => 'zp_flickr_widget', 'description' => __('A widget that displays your Flickr photos.', 'novo') );
 
@@ -63,15 +64,23 @@ class zp_flickr_widget extends WP_Widget {
 		 ?>
 			
 			<div id="flickr_badge_wrapper" class="clearfix">
-				<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=<?php echo $postcount ?>&amp;display=<?php echo $display ?>&amp;size=s&amp;layout=x&amp;source=<?php echo $type ?>&amp;<?php echo $type ?>=<?php echo $flickrID ?>"></script>
+				<?php 
+				$this->flickr_script.='<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=' . $postcount . '&amp;display='. $display .'&amp;size=s&amp;layout=x&amp;source='. $type .'&amp;'. $type .'='. $flickrID .'" ></script>';
+				?>
 			</div>
 		
 		<?php
 
 		/* After widget (defined by themes). */
 		echo $after_widget;
+		 add_action('wp_footer', array(&$this, 'lmseo_slider_script'),1000);
 	}
-
+	
+	function lmseo_slider_script(){
+		if($this->flickr_script != ''){
+			echo $this->flickr_script;
+		}
+	}
 	/* ---------------------------- */
 	/* ------- Update Widget -------- */
 	/* ---------------------------- */

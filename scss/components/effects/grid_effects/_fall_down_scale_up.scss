@@ -1,0 +1,13 @@
+	/*
+	* Fall down / scale up 
+	*/
+	.zp-effect-fall.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: fallDown 0.6s forwards;
+		animation: fallDown 0.6s forwards;
+	}
+	.zp-effect-fall.zp-effect-active div a:nth-child(2),
+	.zp-effect-fall.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: scaleUpFadeIn 0.6s forwards;
+		animation: scaleUpFadeIn 0.6s forwards;
+	}

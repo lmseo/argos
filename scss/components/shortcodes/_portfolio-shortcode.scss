@@ -1,0 +1,16 @@
+	/*--------------------------------------------------------------------------------------------------
+    Portfolio Shortcode 
+	--------------------------------------------------------------------------------------------------*/
+	.portfolio_shortcode {
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.portfolio_shortcode .zp-grid-wrapper .element a:hover span > span {
+		top: 45%;
+		-webkit-transition: all 0.2s;
+		-moz-transition: all 0.2s;
+		-mos-transition: all 0.2s;
+		transition: all 0.2s;
+		margin: 0 auto;
+	}

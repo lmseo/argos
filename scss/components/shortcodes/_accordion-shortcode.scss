@@ -1,0 +1,56 @@
+/*------------------- ACCORDION ------------------------*/
+.accordion-unit {
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+.accordion_container {
+	background: rgba(0, 0, 0, 0);
+	border: 2px solid #515E6C;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+.trigger-button {
+	float: left;
+	width: 100%;
+	font-weight: 400;
+	-webkit-transition: color, box-shadow 0.1s ease-out;
+	-moz-transition: color, box-shadow 0.1s ease-out;
+	-o-transition: color, box-shadow 0.1s ease-out;
+	transition: color, box-shadow 0.1s ease-out;
+	cursor: pointer;
+}
+.trigger-button span {
+	padding: 8px 0 8px 20px;
+	display: block;
+}
+.trigger-button.active {
+	font-weight: 400;
+}
+.accordion {
+	float: left;
+	font-style: italic;
+	padding: 0 20px 20px;
+}
+.accordion_image {
+	display: none !important;
+	background-color: #646D72;
+	background-image: url("https://489323192bc07f331d47-c06041d322f1ad6b39306f4da82d1689.ssl.cf1.rackcdn.com/wp-content/themes/argo/include/shortcodes/shortcode_icons/plus.png");
+	background-position: 8px center;
+	background-repeat: no-repeat;
+	float: left;
+	height: 24px;
+	margin: 10px 13px;
+	width: 24px;
+}
+.active .accordion_image {
+	background-image: url("https://489323192bc07f331d47-c06041d322f1ad6b39306f4da82d1689.ssl.cf1.rackcdn.com/wp-content/themes/argo/include/shortcodes/shortcode_icons/minus.png");
+	background-color: #646D72;
+	background-position: 8px center;
+	background-repeat: no-repeat;
+	display: none;
+	float: left;
+	height: 24px;
+	margin: 10px 13px;
+	width: 24px;
+}

@@ -29,88 +29,16 @@ require_once(get_stylesheet_directory().'/include/widgets/search/classes/class.c
 */
 require_once(get_stylesheet_directory().'/include/widgets/search/classes/class.custompostimage.php');
 
-add_action('template_redirect', 'enable_ajax_func');
-function enable_ajax_func(){
-	wp_localize_script('ajaxify','ajaxify_function',array('ajaxurl' => admin_url('admin-ajax.php' )));
-}
-/*add_action('wp_ajax_nopriv_lmseo_ajax_json_encode','lmseo_ajax_json_encode');
-add_action('wp_ajax_lmseo_ajax_json_encode','lmseo_ajax_json_encode' );
-function lmseo_ajax_json_encode(){
-	header('Content-Type: application/json');
-	$posts_array = get_posts();
-	echo json_encode($posts_array);
-	die();
-}*/
-/*add_action('wp_ajax_nopriv_lmseo_ajax_retrieve_results','lmseo_ajax_retrieve_results');
-add_action('wp_ajax_lmseo_ajax_retrieve_results','lmseo_ajax_retrieve_results' );
-function lmseo_ajax_retrieve_results(){
-	header('Content-Type: application/json');
-	$args = array(
-		'sort_order' => 'asc',
-		'sort_column' => 'post_title',
-		'hierarchical' => 1,
-		'exclude' => '',
-		'include' => '',
-		'meta_key' => '',
-		'meta_value' => '',
-		'authors' => '',
-		'child_of' => 0,
-		'parent' => -1,
-		'exclude_tree' => '',
-		'number' => '',
-		'offset' => 0,
-		'post_type' => 'page',
-		'post_status' => 'publish'
-	); 
-	$posts_array = get_pages();
-	echo json_encode($posts_array);
-	die();
-}*/
-
-/*add_action('wp_ajax_nopriv_lmseo_ajax_retrieve_posts_wp_query','lmseo_ajax_retrieve_posts_wp_query');
-add_action('wp_ajax_lmseo_ajax_retrieve_posts_wp_query','lmseo_ajax_retrieve_posts_wp_query' );
-function lmseo_ajax_retrieve_posts_wp_query(){
-	header('Content-Type: application/json');
-	$args = array(
-		'post_type' => array('page', 'post'),
-		'post_status'=>'publish'
-	);
-	$posts_array = new WP_Query( $args );
-	//print_r($posts_array);
-	$processed_post_array = array( );
-	//echo "<ul>";
-	if ( $posts_array->have_posts() ) {
-		while ( $posts_array->have_posts() ) {
-			$posts_array->the_post();
-			$postid = get_the_ID();
-			//echo "<ul><li>";
-			$processed_post_array[$postid] = [
-			"title"=>get_the_title(),
-			"url"=>get_permalink( $postid),
-			"excerpt"=>get_the_excerpt(),
-			"date"=>get_the_date(),
-			"thumbnail"=>get_the_post_thumbnail( $postid, "Feature" )
-			];
-		//	echo  get_the_title() ;
-		//	echo "</li>\n\n<li>";
-		//	echo get_permalink( $postid, $leavename );
-		//	echo "</li>\n\n<li>";
-		//	echo the_permalink();
-		//	echo "</li></ul>\n\n";
-		}
-	} else {
-	// no posts found
-		_e( 'Sorry, no posts matched your criteria.' );
-	}
-	//print_r($processed_post_array);
-	echo json_encode($posts_array->get_posts());
-	die();
-}*/
+//add_action('template_redirect', 'enable_ajax_func');
+//function enable_ajax_func(){
+//	wp_localize_script('ajaxify','ajaxify_function',array('ajaxurl' => admin_url('admin-ajax.php' )));
+//}
 
 add_action('wp_ajax_nopriv_lmseo_ajax_retrieve_posts_wp_query_with_class','lmseo_ajax_retrieve_posts_wp_query_with_class');
 add_action('wp_ajax_lmseo_ajax_retrieve_posts_wp_query_with_class','lmseo_ajax_retrieve_posts_wp_query_with_class' );
 function lmseo_ajax_retrieve_posts_wp_query_with_class(){
 	header('Content-Type: application/json');
+
 	$search_term = filter_var($_GET['term'],FILTER_SANITIZE_STRING); 
 	
 	if(empty($search_term)){
@@ -152,11 +80,12 @@ function lmseo_ajax_retrieve_posts_wp_query_with_class(){
 				$myPostArrayObject->setPostUrl(get_permalink( $myPostArrayObject->getPostId()));
 				$myPostArrayObject->setPostExcerpt(get_excerpt_by_id($postID,20));
 				$myPostArrayObject->setPostDate(get_the_date());
+				$myPostArrayObject->setPostLink($myPostArrayObject->getPostUrl(), $myPostArrayObject->getPostTitle(), 'search-app-title-link');
 				$myPostArrayObject->setPostThumbnail(get_the_post_thumbnail( $myPostArrayObject->getPostId(), "Feature", array('class'=>'search-app-img') ));
 				$newPostThumbnail = $myPostArrayObject->getPostThumbnail();
-				if(empty($newPostThumbnail)){
-					$myPostArrayObject->setPostThumbnail('<img width="70" height="70" src="/wp-content/themes/argo/include/widgets/search/images/no-thumbnail.png" class="search-app-img wp-post-image" alt="No Thumbnail Available">');
-				}
+
+				//if no image is available then use a default image
+				$myPostArrayObject->setPostThumbnailWithLink($newPostThumbnail,$myPostArrayObject->getPostUrl(),'search-app-img-link' );
 
 				//echo "<ul><li>";
 				/*$processed_post_array[$loop_counter]= ["WP_Post Object"=>array(
@@ -230,10 +159,10 @@ class lmseo_search_widget extends WP_Widget {
 			echo $before_title . $title . $after_title;
 		 ?>
 <div data-ng-app="searchApp" class="search-app">
-	<div data-ng-controller="pageListController" >
+	<div data-ng-controller="pageListController">
 		<div data-ng-class="{'search-app-wrapper':isActive, 'search-app-wrapper-active':!isActive}" class="search-app-wrapper">
-			<input data-ng-model="search_term" data-ng-change="doSearch()" itemprop="query-input" type="search"  placeholder="Search this website">
-			<ul class="search-app-list"><li data-ng-repeat="post in posts | orderBy:'postTitle'" class="search-app-list-element list-element-divider clearfix"><a href="{{post.postUrl}}" data-ng-bind-html="post.postThumbnail" class="search-app-img-link"></a><h3 class="search-app-title"><a href="{{post.postUrl}}" class="search-app-title-link">{{post.postTitle}}</a></h3><p class="search-app-url">{{post.postUrl}}</p><p class="search-app-excerpt"><span class="search-app-date">{{post.postDate}}</span>&nbsp;-&nbsp;{{post.postExcerpt}}</p></li></ul>
+			<input data-ng-model="search_term" data-ng-keyup="doSearch()" itemprop="query-input" type="search"  placeholder="Search this website">
+			<ul class="search-app-list" ng-cloak><li data-ng-repeat="post in posts | orderBy:'postTitle'" class="search-app-list-element list-element-divider clearfix"><span data-ng-bind-html="post.postThumbnailWithLink"></span><h3 class="search-app-title" data-ng-bind-html="post.postLink"></h3><p class="search-app-url">{{post.postUrl}}</p><p class="search-app-excerpt"><span class="search-app-date">{{post.postDate}}</span>&nbsp;-&nbsp;{{post.postExcerpt}}</p></li></ul>
 		</div>
 	</div>
 </div>

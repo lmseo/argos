@@ -9,10 +9,4 @@
 @import "widgets/flickr";
 @import "widgets/social-icons";
 @import "widgets/tooltip";
-
-@media #{$medium-up} {
-}
-@media #{$large-up} {
-}
-@media #{$xlarge-up} {
-}
+@import "widgets/lmseo-custom-menu";

@@ -1,6 +1,7 @@
 //Galereya JavaScript options
-$(function() {
-	$('#portfolio-gallery-container').galereya({
+jQuery.noConflict();
+jQuery(function() {
+	jQuery('#portfolio-gallery-container').galereya({
 	//spacing between cells of the masonry grid
 		spacing: 10,
 
@@ -18,7 +19,7 @@ $(function() {
 
 		//speed of appearance of cells
 		cellFadeInSpeed: 200,
-
+		
 		//the name of the general category
 		noCategoryName: 'all',
 

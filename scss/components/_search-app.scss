@@ -1,0 +1,43 @@
+.search-app{
+	.search-app-wrapper{
+		padding: 1.5rem 0;
+	}
+	.search-app-wrapper-active{
+		padding: 1.5rem 0 0;
+	}
+	.search-app-list-element{
+		display: block;
+		padding: 0;
+		margin: 0;
+
+		h3{
+			padding: 0;margin: 0;
+			font-size: 1rem;
+		}
+		.search-app-title{
+			border: none;
+			line-height: 1rem;
+			padding-top: 8px;
+		}
+		.search-app-img-tittle-link{}
+		.search-app-img-link{
+			display: block;float: left;
+			margin-right: 10px;
+			margin-bottom: 0;
+		}
+		.search-app-img{}
+		
+		.search-app-url{
+			color:#888;
+		}
+		.search-app-date{
+			color: #7b8b9d;
+		}
+		.search-app-excerpt{}
+	}
+	.list-element-divider{
+		border-bottom:1px solid #687686;
+		margin: 0 2px;
+	}
+	
+}

@@ -2,3 +2,6 @@
 /.sass-cache/*
 *.DS_Store
 /stylesheets/*
+/bower_components/*
+/test/*
+/node_modules/*

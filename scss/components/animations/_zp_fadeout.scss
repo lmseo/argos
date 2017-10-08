@@ -1,0 +1,16 @@
+@-webkit-keyframes zp_fadeOut{
+	0%{-webkit-transform: translateY(0);opacity:0.1}
+	100%{-webkit-transform:translateY(100%);opacity:1}
+}
+@-moz-keyframes zp_fadeOut{
+	0%{-webkit-transform: translateY(0);opacity:0.1}
+	100%{-webkit-transform:translateY(100%);opacity:1}
+}
+@-o-keyframes zp_fadeOut{
+	0%{-webkit-transform: translateY(0);opacity:0.1}
+	100%{-webkit-transform:translateY(100%);opacity:1}
+}
+@keyframes zp_fadeOut{
+	0%{-webkit-transform: translateY(0);opacity:0.1}
+	100%{-webkit-transform:translateY(100%);opacity:1}
+}

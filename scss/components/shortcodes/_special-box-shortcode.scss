@@ -1,0 +1,73 @@
+/*-------------------------SPECIAL BOX---------------------------*/
+.special-services-box {
+	margin-bottom: 20px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+.box-wrapper {
+	text-align: center;
+}
+.box-wrapper p {
+	font-size: 16px;
+	font-size: 1.6rem;
+	font-style: italic;
+}
+.box-wrapper > h4 {
+	margin-top: 20px;
+}
+.box-wrapper span {
+	color: #646D72;
+}
+
+/* addede hover functions */
+
+.zp-icon {
+	display: inline-block;
+	font-family: "ModernPictogramsNormal";
+	font-size: 60px;
+	cursor: pointer;
+	margin: 15px 30px;
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Effect 3 */
+
+.zp-icon-effect .zp-icon {
+	box-shadow: 0 0 0 4px #515E6C;
+	-webkit-transition: color 0.3s;
+	-moz-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+/* Effect 3b */
+
+.zp-icon-effect .zp-icon {
+	color: #515E6C;
+}
+.no-touch .zp-icon-effect .zp-icon:hover {
+	color: #fff;
+	background: #515E6C;
+	text-decoration: none;
+	box-shadow: none;
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	transform: scale(1.2);	
+}
+
+/*ends ades CSS*/
+
+.special-services-box .button {
+	color: inherit;
+	margin-top: 10px;
+	margin-top: 1rem;
+	font-style: normal;
+}

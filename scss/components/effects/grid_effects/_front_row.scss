@@ -1,0 +1,24 @@
+/* Front row */
+	.zp-effect-frontrow div {
+		overflow: hidden;
+	}
+
+	.zp-effect-frontrow.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: moveToBack 0.8s forwards;
+		animation: moveToBack 0.8s forwards;
+	}
+
+	.zp-effect-frontrow.zp-effect-active div a:nth-child(2),
+	.zp-effect-frontrow.zp-effect-active div.zp-empty a {
+		-webkit-animation: moveToFront 0.8s forwards;
+		animation: moveToFront 0.8s forwards;
+	}
+
+	.zp-effect-frontrow.zp-effect-active div.zp-empty a {
+		opacity: 0;
+	}
+
+	.zp-effect-frontrow.zp-effect-active div:not(.zp-empty) a:only-child {
+		-webkit-animation: fadeOut 0.5s forwards;
+		animation: fadeOut 0.5s forwards;
+	}

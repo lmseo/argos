@@ -1,0 +1,12 @@
+/* Superscale */
+	.zp-effect-superscale.zp-effect-active div:not(.zp-empty) a:first-child {
+		-webkit-animation: scaleDown 0.6s ease-in-out forwards;
+		animation: scaleDown 0.6s ease-in-out forwards;
+	}
+
+	.zp-effect-superscale.zp-effect-active div a:nth-child(2),
+	.zp-effect-superscale.zp-effect-active div.zp-empty a {
+		opacity: 0;
+		-webkit-animation: scaleIn 0.6s ease-in-out forwards;
+		animation: scaleIn 0.6s ease-in-out forwards;
+	}

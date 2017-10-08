@@ -57,23 +57,23 @@ class cta_widget extends WP_Widget {
 		$cta = $instance['cta'];
 		if ( $cta=='cta' ){
 		 ?>	
-			<div class="cta-widget">
-				<h2 class="">More information</h2>
-				<div class="cta-header-divider"><hr class="small"></div>
-				<ul class="cta-content-list">
-				<li>We only carry windows manufactured in the U.S.A.</li>
-				<li>Free in-home consultation.</li>
-				<li>Total renovation specialists.</li>
-				</ul>
-				<div class="buttons-wrapper clearfix">
-					<div class="medium-6 columns">
-						<a class=" cta_button button rounded medium-btn orange" href="/contact/">Get a Quote Now!</a>
-					</div>
-					<div class="medium-6 columns">
-						<a class=" cta_button button rounded medium-btn orange" href="tel:2133210784">Call Now! (213)-321-0784</a>
-					</div>
-				</div>
-			</div>
+                    <div class="cta-widget">
+                        <h2 class="">More Information</h2>
+                        <div class="cta-header-divider"><hr class="small"></div>
+                        <ul class="cta-content-list">
+                            <li>We only carry windows manufactured in the U.S.A.</li>
+                            <li>Free in-home consultation.</li>
+                            <li>Total renovation specialists.</li>
+                        </ul>
+                        <div class="buttons-wrapper clearfix">
+                            <div class="medium-6 columns">
+                                    <a class=" cta_button button radius medium-btn maroon" href="/contact/">Get a Quote Now!</a>
+                            </div>
+                            <div class="medium-6 columns">
+                                    <a class=" cta_button button radius medium-btn maroon" href="tel:17602652255">Call Now! (760) 265-2255</a>
+                            </div>
+                        </div>
+                    </div>
            
 		<?php
 		}

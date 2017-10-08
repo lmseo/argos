@@ -1,0 +1,44 @@
+.infobox_container .download_box, .infobox_container .success_box, .infobox_container .alert_box, .infobox_container .warning_box, .infobox_container .notice_box, .infobox_container .note_box {
+  margin-bottom: 25px;
+  padding: 20px;
+  color: #5A5A5A;
+}
+
+.note_box {
+  background-color: #F2F2F2;
+}
+
+.download_box {
+  background-color: #E0E9D1;
+}
+
+.success_box {
+  background-color: #EAF0EF;
+}
+
+.alert_box {
+  background-color: #F9E8E3;
+}
+
+.warning_box {
+  background-color: #F9EFE3;
+}
+
+.notice_box {
+  background-color: #FAFAED;
+}
+
+.drop-caps {
+  color: #2D3438;
+  float: left;
+  font-size: 300%;
+  font-weight: 700;
+  line-height: 0.8em;
+  margin-right: 0.1em;
+  padding-bottom: 0.1em;
+  position: relative;
+  text-transform: uppercase;
+  top: 4px;
+}
+
+/*# sourceMappingURL=_divider-shortcode.scss.map */

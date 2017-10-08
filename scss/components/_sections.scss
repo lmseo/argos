@@ -1,0 +1,14 @@
+section{
+	padding: 4rem 0;
+}
+.section_blue {
+    //find the color under settings
+    background-color: $septenary-color;
+    color: $primary-color;
+    h1,h2,h3,h4,h5,h6 {
+	    color:$primary-color;
+	}
+	a{
+		color:$primary-color;
+	}
+}

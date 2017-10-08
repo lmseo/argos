@@ -60,12 +60,11 @@
     font-style: italic;
 }
 .footer-widgets-top{
-	padding: 1.5rem 0 1.5rem;
+	padding: 0;
 	background-color: #05354F;
 }
 .footer-widgets-bottom{
-	padding: 65px 0;
-	padding: rem-calc(65) 0;
+	padding:0;
 	.widget{
 	  padding-bottom: 10px;
 	  padding-top: 10px;
@@ -78,4 +77,13 @@
 	padding-left: 5px;
 	padding-top: 5px;
 	position: relative;*/
+}
+@media #{$medium-up} {
+	.footer-widgets-bottom{
+		padding: 4rem 0;
+	}
+}
+@media #{$large-up} {
+}
+@media #{$xlarge-up} {
 }
